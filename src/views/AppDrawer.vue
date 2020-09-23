@@ -1,21 +1,31 @@
 <template>
-  <v-navigation-drawer
-    class="mt-2"
-    v-model="drawer"
-    :clipped="$vuetify.breakpoint.lgAndUp"
-    app
-  >
-    <v-list dense>
+  <v-navigation-drawer v-model="drawer" app>
+    <!-- :clipped="$vuetify.breakpoint.lgAndUp" -->
+
+    <v-list>
+      <v-list-item two-line>
+        <v-list-item-avatar>
+          <img src="https://randomuser.me/api/portraits/men/81.jpg" />
+        </v-list-item-avatar>
+
+        <v-list-item-content>
+          <v-list-item-title>Valencia, Franz Joshua</v-list-item-title>
+          <v-list-item-subtitle>System Administrator</v-list-item-subtitle>
+        </v-list-item-content>
+      </v-list-item>
+
       <template v-for="item in items">
-        <v-row v-if="item.heading" :key="item.heading" align="center">
+        <v-row
+          v-if="item.heading"
+          :key="item.heading"
+          align="center"
+          no-gutters
+        >
           <v-col cols="12">
             <v-subheader v-if="item.heading">
               {{ item.heading }}
             </v-subheader>
           </v-col>
-          <!-- <v-col cols="6" class="text-center">
-                        <a href="#!" class="body-2 black--text">EDIT</a>
-                    </v-col> -->
         </v-row>
         <v-list-group
           v-else-if="item.children"
@@ -59,6 +69,18 @@
         </v-list-item>
       </template>
     </v-list>
+    <template v-slot:append>
+      <div class="pa-2">
+        <v-btn
+          block
+          @click.prevent="$store.dispatch('auth/logout')"
+          v-if="$auth.check()"
+        >
+          <v-icon class="mr-5">mdi-logout-variant</v-icon>
+          Logout</v-btn
+        >
+      </div>
+    </template>
   </v-navigation-drawer>
 </template>
 
@@ -77,28 +99,13 @@ export default {
       drawer: true,
       items: [
         { heading: "Navigation" },
-        { icon: "mdi-view-dashboard", text: "Dashboard", path: "/dashboard" },
+        { icon: "mdi-home-circle-outline", text: "Home", path: "/" },
+        { icon: "mdi-view-dashboard", text: "Cores", path: "/cores" },
         {
-          icon: "mdi-file-table",
-          text: "Appointment",
-          path: "/appointment"
+          icon: "mdi-account-box-multiple-outline",
+          text: "Employees",
+          path: "/employees"
         },
-        {
-          icon: "mdi-file-table",
-          text: "Plantilla/JOW Contract",
-          path: "/plantilla-jow-contract"
-        },
-        {
-          icon: "mdi-file-table",
-          text: "Payroll",
-          path: "/payroll"
-        },
-        {
-          icon: "mdi-file-table",
-          text: "TLB",
-          path: "/tlb"
-        },
-
         { heading: "System Administration" },
         {
           icon: "mdi-chevron-up",

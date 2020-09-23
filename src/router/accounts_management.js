@@ -1,5 +1,5 @@
-import UserAccounts from "../pages/accounts_management/UserAccounts";
-import UserGroups from "../pages/accounts_management/UserGroups";
+import UserAccounts from "../views/accounts_management/UserAccounts";
+import UserGroups from "../views/accounts_management/UserGroups";
 
 const routes = [
   {

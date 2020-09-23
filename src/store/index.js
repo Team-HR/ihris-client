@@ -16,11 +16,11 @@ export default new Vuex.Store({
     app_loading: false
   },
   mutations: {
-    SET_APP_IS_LOADING(state) {
+    SET_APP_LOADING(state) {
       // console.log("LOADING!!!!....");
       state.app_loading = true;
     },
-    SET_APP_DONE_LOADING(state) {
+    SET_APP_LOADING_DONE(state) {
       state.app_loading = false;
     }
   },
@@ -34,10 +34,10 @@ export default new Vuex.Store({
   },
   actions: {
     setAppLoading({ commit }) {
-      commit("SET_APP_IS_LOADING");
+      commit("SET_APP_LOADING");
     },
-    setAppDoneLoading({ commit }) {
-      commit("SET_APP_DONE_LOADING");
+    setAppLoadingDone({ commit }) {
+      commit("SET_APP_LOADING_DONE");
     }
   },
   getters: {

@@ -1,27 +1,20 @@
 <template>
   <v-app>
-    <!-- <v-progress-linear value="0"></v-progress-linear> -->
-    <AppProgress />
+    <app-progress />
+    <app-bar @toggled_drawer="drawer = !drawer" v-if="$auth.check()" />
+    <app-drawer v-if="$auth.check()" :drawn="drawer" class="elevation-0 mt-1" />
     <v-card class="overflow-y-hidden">
-      <app-drawer v-if="$auth.check()" :drawn="drawer" />
-      <app-bar @toggled_drawer="drawer = !drawer" v-if="$auth.check()" />
       <v-sheet
         id="scrolling-techniques"
         class="overflow-y-auto"
         :max-height="window_height"
       >
-        <!-- Sizes your content based upon application components -->
         <v-main>
-          <!-- Provides the application the proper gutter -->
           <v-container
-            fluid
             :style="{ 'min-height': window_height + 'px' }"
             class="mb-15"
           >
-            <!-- If using vue-router -->
-            <!-- <transition> -->
             <router-view />
-            <!-- </transition> -->
           </v-container>
         </v-main>
       </v-sheet>
@@ -30,9 +23,9 @@
 </template>
 
 <script>
-import AppProgress from "./components/AppProgress";
-import AppBar from "./components/AppBar";
-import AppDrawer from "./components/AppDrawer";
+import AppProgress from "./views/AppProgress";
+import AppBar from "./views/AppBar";
+import AppDrawer from "./views/AppDrawer";
 export default {
   data() {
     return {
@@ -63,7 +56,6 @@ export default {
 <style>
 html,
 body {
-  /* margin: 0; */
   overflow: hidden !important;
 }
 </style>

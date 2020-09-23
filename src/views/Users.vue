@@ -23,18 +23,5 @@ export default {
         });
     }
   }
-  // mounted() {
-  //     this.$http({
-  //         url: 'auth/user'
-  //     })
-  //     .then(() => {
-  //         console.log('success')
-  //     }, () => {
-  //         console.log('error')
-  //     })
-  //     .catch(() => {
-  //         console.log('catch')
-  //     });
-  // }
 };
 </script>

@@ -1,5 +1,5 @@
-import Error403 from "../pages/error/403.vue";
-import Error404 from "../pages/error/404.vue";
+import Error403 from "../views/error/403.vue";
+import Error404 from "../views/error/404.vue";
 
 const routes = [
   {

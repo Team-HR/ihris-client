@@ -1,9 +1,9 @@
 import Vue from "vue";
 import App from "./App.vue";
-import http from "./http";
+import http from "./configs/http";
 import store from "./store";
 import router from "./router";
-import auth from "./auth";
+import auth from "./configs/auth";
 import vuetify from "./plugins/vuetify";
 import "roboto-fontface/css/roboto/roboto-fontface.css";
 import "@mdi/font/css/materialdesignicons.css";

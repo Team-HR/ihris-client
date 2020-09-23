@@ -1,33 +1,38 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-
+import Cores from "../views/Cores.vue";
+import Home from "../views/Home.vue";
 Vue.use(VueRouter);
 
-const DEFAULT_TITLE = "HRMDS";
+const DEFAULT_TITLE = "IHRIS";
 
 import auth from "./auth";
-import site from "./site";
-import appointment from "./appointment";
-import accounts_management from "./accounts_management";
 import errors from "./errors";
-import plantilla_jocontract from "./plantilla_jocontract";
-import payroll from "./payroll";
-import tlb from "./tlb";
+import accs from "./accounts_management";
+import emps from "./employees";
 
-const routes = [].concat(
-  auth,
-  site,
-  errors,
-  accounts_management,
-  appointment,
-  plantilla_jocontract,
-  payroll,
-  tlb
-);
+const routes = [
+  { path: "*", redirect: "/404" },
+  {
+    path: "/cores",
+    name: "cores",
+    component: Cores,
+    meta: {
+      auth: true
+    }
+  },
+  {
+    path: "/",
+    name: "home",
+    component: Home,
+    meta: {
+      auth: true
+    }
+  }
+].concat(auth, errors, accs, emps);
 
 Vue.router = new VueRouter({
   hashbang: false,
-  // history: true,
   mode: "history",
   base: __dirname,
   routes: routes
