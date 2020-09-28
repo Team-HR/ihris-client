@@ -1,7 +1,11 @@
 export default {
-  namespaced: true,
-  state: {},
+  // namespaced: true,
+  state: {
+    testing: "Testing"
+  },
   mutations: {},
   actions: {},
-  getters: {}
+  getters: {
+    getTesting: state => state.testing
+  }
 };

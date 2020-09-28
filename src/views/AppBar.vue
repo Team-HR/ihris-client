@@ -24,9 +24,9 @@
     <v-toolbar-title class="ml-2">
       <span>
         IHRIS
-        <subquotes class="grey--text">
+        <span class="grey--text">
           Integrated Human Resource Information System
-        </subquotes></span
+        </span></span
       >
     </v-toolbar-title>
 

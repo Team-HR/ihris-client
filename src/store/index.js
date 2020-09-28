@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import auth from "./auth.js";
-import drawer from "./drawer.js";
+import auth from "./auth";
+import drawer from "./drawer";
 import appointment from "./appointment";
 import plantilla_jocontracts from "./plantilla_jocontracts";
 import payroll from "./payroll";
@@ -17,7 +17,6 @@ export default new Vuex.Store({
   },
   mutations: {
     SET_APP_LOADING(state) {
-      // console.log("LOADING!!!!....");
       state.app_loading = true;
     },
     SET_APP_LOADING_DONE(state) {

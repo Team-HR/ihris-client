@@ -1,9 +1,12 @@
 <template>
-  <div></div>
+  <div>{{ testing }}</div>
 </template>
 
 <script>
-export default {};
+import { mapGetters } from "vuex";
+export default {
+  computed: mapGetters({ testing: "getTesting" })
+};
 </script>
 
 <style></style>
