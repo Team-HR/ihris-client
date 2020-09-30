@@ -3,8 +3,8 @@
   <v-app-bar
     class="mt-1"
     absolute
-    shrink-on-scroll
-    scroll-target="#scrolling-techniques"
+    scroll-target="body"
+    elevate-on-scroll
     app
     dense
     v-if="$auth.check()"
@@ -16,18 +16,15 @@
 
     <v-app-bar-nav-icon @click.stop="toggle_drawer" large> </v-app-bar-nav-icon>
 
-    <v-btn icon to="/cores">
+    <!-- <v-btn icon to="/cores">
       <img src="../assets/logo.svg" class="pa-0 ma-0" width="40" />
-    </v-btn>
+    </v-btn> -->
 
     <!-- <span class="ma-2"> Integrated Human Resource Information System </span> -->
-    <v-toolbar-title class="ml-2">
+    <v-toolbar-title>
       <span>
         IHRIS
-        <span class="grey--text">
-          Integrated Human Resource Information System
-        </span></span
-      >
+      </span>
     </v-toolbar-title>
 
     <v-spacer></v-spacer>

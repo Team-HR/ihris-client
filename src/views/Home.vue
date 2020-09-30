@@ -1,5 +1,5 @@
 <template>
-  <div>{{ testing }}</div>
+  <div></div>
 </template>
 
 <script>

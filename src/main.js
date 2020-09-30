@@ -7,7 +7,6 @@ import auth from "./configs/auth";
 import vuetify from "./plugins/vuetify";
 import "roboto-fontface/css/roboto/roboto-fontface.css";
 import "@mdi/font/css/materialdesignicons.css";
-
 import Echo from "laravel-echo";
 
 window.Pusher = require("pusher-js");
@@ -22,7 +21,6 @@ window.Echo = new Echo({
 });
 
 Vue.config.productionTip = false;
-
 new Vue({
   el: "#app",
   http: http,

@@ -3,6 +3,7 @@
     <v-data-table
       :headers="headers"
       :items="employees"
+      :search="search"
       sort-by="last_name"
       class="elevation-1"
     >
@@ -10,6 +11,13 @@
         <v-toolbar flat color="white">
           <v-toolbar-title>Employees</v-toolbar-title>
           <v-divider class="mx-4" inset vertical></v-divider>
+          <v-text-field
+            label="Search"
+            placeholder="Employee Name"
+            v-model="search"
+            clearable
+            class="mt-8"
+          ></v-text-field>
           <v-spacer></v-spacer>
         </v-toolbar>
       </template>
@@ -34,6 +42,7 @@
 <script>
 export default {
   data: () => ({
+    search: "",
     headers: [
       {
         text: "ID",
@@ -45,7 +54,7 @@ export default {
       {
         text: "Actions",
         value: "actions",
-        sortable: false,  
+        sortable: false,
         align: "center",
         width: 10
       },
