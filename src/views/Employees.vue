@@ -11,6 +11,10 @@
         <v-toolbar flat color="white">
           <v-toolbar-title>Employees</v-toolbar-title>
           <v-divider class="mx-4" inset vertical></v-divider>
+          <v-btn color="primary" @click="add_edit_dialog = !add_edit_dialog"
+            ><v-icon>mdi-plus</v-icon> Add</v-btn
+          >
+          <v-divider class="mx-4" inset vertical></v-divider>
           <v-text-field
             label="Search"
             placeholder="Employee Name"
@@ -21,27 +25,43 @@
           <v-spacer></v-spacer>
         </v-toolbar>
       </template>
-      <template v-slot:[`item.full_name`]="{ item }">
+      <!-- <template v-slot:[`item.full_name`]="{ item }">
         {{ item.full_name }}
-      </template>
-      <template v-slot:[`item.actions`]="{ item }">
+      </template> -->
+      <!-- <template v-slot:[`item.actions`]="{ item }">
         <v-btn color="success" small>
-          <v-icon small class="mr-2" @click="editItem(item)">
+          <v-icon small class="mr-2" @click="test">
             mdi-pencil
           </v-icon>
           Edit
         </v-btn>
-      </template>
-      <template v-slot:no-data>
-        <v-btn color="primary" @click="initialize">Reset</v-btn>
+      </template> -->
+      <template>
+        <v-btn color="primary">Reset</v-btn>
       </template>
     </v-data-table>
+    <v-dialog
+      v-model="add_edit_dialog"
+      scrollable
+      max-width="500px"
+      transition="dialog-transition"
+    >
+      <AddEditForm />
+    </v-dialog>
   </div>
 </template>
 
 <script>
+import Vue from "vue";
+import { mapActions, mapGetters, mapState } from "vuex";
+import AddEditForm from "../components/aministrative_services/employees/AddEditForm";
+
 export default {
+  components: {
+    AddEditForm
+  },
   data: () => ({
+    add_edit_dialog: true,
     search: "",
     headers: [
       {
@@ -61,43 +81,26 @@ export default {
       {
         text: "Fullname",
         value: "full_name"
+      },
+      {
+        text: "Gender",
+        value: "gender"
       }
     ],
-    employees: [],
-    editedIndex: -1,
-    editedItem: {
-      last_name: "",
-      first_name: "",
-      middle_name: "",
-      ext_name: ""
-    },
-    defaultItem: {
-      last_name: "",
-      first_name: "",
-      middle_name: "",
-      ext_name: ""
-    }
+    employeesCopy: []
   }),
-
-  created() {
-    this.initialize();
+  computed: {
+    ...mapGetters({
+      employees: "employees/getItems"
+    })
   },
-
+  mounted() {
+    this.init_load();
+  },
   methods: {
-    initialize() {
-      this.$store.dispatch("setAppLoading");
-      this.axios
-        .get("/employees")
-        .then(res => {
-          this.employees = res.data;
-        })
-        .then(() => {
-          this.$store.dispatch("setAppLoadingDone");
-        });
-    },
-    editItem(item) {
-      // console.log(item);
-    }
+    ...mapActions({
+      init_load: "employees/initialize"
+    })
   }
 };
 </script>
