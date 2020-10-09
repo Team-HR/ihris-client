@@ -16,34 +16,33 @@ var _default = {
   state: function state() {
     return {
       items: [],
-      fields: {
-        gender: {
-          type: "select",
-          label: "Gender",
-          value: "",
-          items: ["FEMALE", "MALE"]
-        },
-        first_name: {
-          type: "text",
-          label: "First Name",
-          value: ""
-        },
-        middle_name: {
-          type: "text",
-          label: "Middle Name",
-          value: ""
-        },
-        last_name: {
-          type: "text",
-          label: "Last Name",
-          value: ""
-        },
-        ext_name: {
-          type: "text",
-          label: "Name Extension",
-          value: ""
-        }
-      }
+      inputs: [{
+        name: "gender",
+        type: "select",
+        label: "Gender",
+        value: "",
+        items: ["FEMALE", "MALE"]
+      }, {
+        name: "first_name",
+        type: "text",
+        label: "First Name",
+        value: ""
+      }, {
+        name: "middle_name",
+        type: "text",
+        label: "Middle Name",
+        value: ""
+      }, {
+        name: "last_name",
+        type: "text",
+        label: "Last Name",
+        value: ""
+      }, {
+        name: "ext_name",
+        type: "text",
+        label: "Name Extension",
+        value: ""
+      }]
     };
   },
   mutations: {
@@ -55,10 +54,10 @@ var _default = {
     },
     RESET_EDIT: function RESET_EDIT(state) {
       // clear values _.forEach won't throw errors if arr is not an array...
-      _lodash["default"].forEach(state.fields, function (obj) {
+      _lodash["default"].forEach(state.inputs, function (obj) {
         // _.set won't throw errors if obj is not an object. With more complex objects, if a portion of the path doesn't exist, _.set creates it
         _lodash["default"].set(obj, "value", "");
-      }); // console.log(state.fields);
+      }); // console.log(state.inputs);
 
     }
   },
@@ -72,22 +71,48 @@ var _default = {
           resolve(data);
         }, reject);
       })["catch"](function (res) {
-        return alert(res);
+        return console.log(res.response.message);
       });
     },
     save: function save(_ref2, payload) {
       var commit = _ref2.commit;
+      console.log("_save:", payload);
 
-      // console.log(payload);
-      var new_employee = _lodash["default"].mapValues(payload, "value");
+      var new_employee = _lodash["default"].map(payload, function (input) {
+        /*
+              REFRACTOR THIS START
+        */
+        var newObj = {};
+        newObj[input.name] = input.value;
+        return newObj;
+        /*
+              REFRACTOR THIS END
+        */
+      });
 
-      var data = _lodash["default"].cloneDeep(new_employee); //Object.assign({}, payload);
+      var Obj = {};
 
+      _lodash["default"].forEach(new_employee, function (input) {
+        _lodash["default"].assign(Obj, input);
+      });
 
-      data.full_name = data.last_name + ", " + data.first_name + " " + data.middle_name;
-      data.id = _lodash["default"].random(2, 200);
-      commit("ADD_ITEM", data);
-      commit("RESET_EDIT");
+      return new Promise(function (resolve, reject) {
+        _vue["default"].axios.post("/employees/store", Obj).then(function (res) {
+          var data = res.data; // console.log(data);
+          // commit("SET_ITEMS", data);
+
+          resolve(data);
+        }, reject);
+      })["catch"](function (res) {
+        return alert(res);
+      }); // const new_employee = _.mapValues(payload, "value");
+      // console.log("new_employee:", new_employee);
+      // const data = _.cloneDeep(new_employee); //Object.assign({}, payload);
+      // data.full_name =
+      //   data.last_name + ", " + data.first_name + " " + data.middle_name;
+      // data.id = _.random(2, 200);
+      // commit("ADD_ITEM", data);
+      // commit("RESET_EDIT");
     } // reset({ commit }) {
     //   commit("RESET_EDIT");
     // }
@@ -100,8 +125,8 @@ var _default = {
     // getEditedItem: state => {
     //   return state.editedItem;
     // },
-    getInputFields: function getInputFields(state) {
-      return state.fields;
+    getInputs: function getInputs(state) {
+      return state.inputs;
     }
   }
 };
