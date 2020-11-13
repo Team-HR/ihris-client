@@ -6,6 +6,7 @@ export default {
   state() {
     return {
       items: [],
+      select_items: [],
       inputs: [
         {
           name: "gender",
@@ -26,6 +27,9 @@ export default {
     SET_ITEMS(state, payload) {
       state.items = payload;
     },
+    SET_SELECT_ITEMS(state, payload) {
+      state.select_items = payload;
+    },
     ADD_ITEM(state, payload) {
       state.items.push(payload);
     },
@@ -45,6 +49,17 @@ export default {
         Vue.axios.get("/employees").then(res => {
           var data = res.data;
           commit("SET_ITEMS", data);
+          resolve(data);
+        }, reject);
+      }).catch(res => console.log(res.response.message));
+    },
+
+    get_select_items({ commit }, payload) {
+      // alert(payload);
+      return new Promise((resolve, reject) => {
+        Vue.axios.get(`/employees/select_items/${payload}`).then(res => {
+          var data = res.data;
+          commit("SET_SELECT_ITEMS", data);
           resolve(data);
         }, reject);
       }).catch(res => console.log(res.response.message));
@@ -98,9 +113,9 @@ export default {
     getItems: state => {
       return state.items;
     },
-    // getEditedItem: state => {
-    //   return state.editedItem;
-    // },
+    getSelectItems: state => {
+      return state.select_items;
+    },
     getInputs: state => {
       return state.inputs;
     }

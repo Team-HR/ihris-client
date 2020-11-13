@@ -100,12 +100,13 @@ export default {
       items: [
         { heading: "Navigation" },
         { icon: "mdi-home-circle-outline", text: "Home", path: "/" },
-        { icon: "mdi-view-dashboard", text: "Cores", path: "/cores" },
-        {
-          icon: "mdi-account-box-multiple-outline",
-          text: "Employees",
-          path: "/employees"
-        },
+        { icon: "mdi-guitar-acoustic", text: "Talent Assessment", path: "/talent-assessment" },
+        // { icon: "mdi-view-dashboard", text: "Cores", path: "/cores" },
+        // {
+        //   icon: "mdi-account-box-multiple-outline",
+        //   text: "Employees",
+        //   path: "/employees"
+        // },
         { heading: "System Administration" },
         {
           icon: "mdi-chevron-up",

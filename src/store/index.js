@@ -7,6 +7,8 @@ import plantilla_jocontracts from "./plantilla_jocontracts";
 import payroll from "./payroll";
 import tlb from "./tlb";
 import employees from "./employees";
+import departments from "./departments";
+
 
 Vue.use(Vuex);
 
@@ -31,7 +33,8 @@ export default new Vuex.Store({
     plantilla_jocontracts,
     payroll,
     tlb,
-    employees
+    employees,
+    departments
   },
   actions: {
     setAppLoading({ commit }) {

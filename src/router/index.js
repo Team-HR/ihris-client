@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Cores from "../views/Cores.vue";
 import Home from "../views/Home.vue";
+
 Vue.use(VueRouter);
 
 const DEFAULT_TITLE = "IHRIS";
@@ -10,6 +11,7 @@ import auth from "./auth";
 import errors from "./errors";
 import accs from "./accounts_management";
 import emps from "./employees";
+import talent_assessment from "./talent_assessment";
 
 const routes = [
   { path: "*", redirect: "/404" },
@@ -29,7 +31,7 @@ const routes = [
       auth: true
     }
   }
-].concat(auth, errors, accs, emps);
+].concat(auth, errors, accs, emps, talent_assessment);
 
 Vue.router = new VueRouter({
   hashbang: false,
