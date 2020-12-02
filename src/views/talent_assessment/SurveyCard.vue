@@ -3,10 +3,10 @@
     <v-list-item two-line>
       <v-list-item-content>
         <div class="overline mb-4">
-          October 10, 2020
+          {{survey.created_at}}
         </div>
         <v-list-item-title class="headline mb-1">
-          Job Competency Assessment
+          {{survey.title}}
         </v-list-item-title>
         <v-list-item-subtitle>Created by: HRMO </v-list-item-subtitle>
       </v-list-item-content>
@@ -27,7 +27,11 @@
 </template>
 
 <script>
-export default {};
+export default {
+  props:{
+    survey: Object
+  }
+};
 </script>
 
 <style></style>

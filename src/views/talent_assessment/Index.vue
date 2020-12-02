@@ -9,8 +9,8 @@
       <v-divider class="mx-4" inset vertical></v-divider>
       <v-spacer></v-spacer>
     </v-toolbar>
-    <template v-for="n in 10">
-      <SurveyCard :key="n" />
+    <template v-for="(survey, index) in surveys">
+      <SurveyCard :key="index" :survey="survey"/>
     </template>
   </div>
 </template>
@@ -19,11 +19,35 @@
 import SurveyCard from "./SurveyCard";
 export default {
   data() {
-    return {};
+    return {
+      surveys: [],
+    };
   },
   components: {
-    SurveyCard
-  }
+    SurveyCard,
+  },
+  methods: {
+    init() {
+      // console.log("TEST");
+      this.axios
+        .get("/talent-assessment/")
+        .then((response) => {
+          // handle success
+          console.log(response.data);
+          this.surveys = Object.assign([], response.data);
+        })
+        .catch((error) => {
+          // handle error
+          console.log(error);
+        })
+        .then(() => {
+          // always executed
+        });
+    },
+  },
+  mounted() {
+    this.init();
+  },
 };
 </script>
 
