@@ -11,6 +11,7 @@
     <!-- list of employees, searchable and sortable by department -->
 
   <v-data-table
+    group-by="department"
     v-model="selected_employees"
     :headers="headers"
     :items="select_employees"
@@ -49,7 +50,7 @@ export default {
     return {
       select_employees: [],
       select_departments: [],
-      selected_department: 1,
+      selected_department: 0,
       selected_employees: [],
       headers: [
           // {
@@ -59,6 +60,7 @@ export default {
           // },
           { text: 'Name', value: 'text' },
           { text: 'Department', value: 'department' },
+          { text: 'department_id', value: 'department_id' },
         ],
     };
   },
@@ -82,11 +84,11 @@ export default {
   },
   mounted() {
     this.initialize().then(res => {
-      // console.log(res);
       this.employees = res;
     });
     this.get_select_employees(this.selected_department).then(res => {
       this.select_employees = res;
+      console.log("Employees: ",res);
     });
     this.get_select_departments().then(res => {
       this.select_departments = res;

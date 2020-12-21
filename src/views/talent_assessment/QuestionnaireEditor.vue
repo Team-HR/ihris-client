@@ -36,7 +36,7 @@
                 </v-radio>
               </v-col>
               <v-col width="20">
-                <v-btn icon><v-icon>mdi-trash-can-outline</v-icon></v-btn>
+                <v-btn icon @click="remove_option(n)"><v-icon>mdi-trash-can-outline</v-icon></v-btn>
               </v-col>
             </v-row>
           </template>
