@@ -12,6 +12,7 @@ import errors from "./errors";
 import accs from "./accounts_management";
 import emps from "./employees";
 import talent_assessment from "./talent_assessment";
+import rnr_system_review_survey from "./rnr_system_review_survey";
 
 const routes = [
   { path: "*", redirect: "/404" },
@@ -31,7 +32,7 @@ const routes = [
       auth: true
     }
   }
-].concat(auth, errors, accs, emps, talent_assessment);
+].concat(auth, errors, accs, emps, talent_assessment, rnr_system_review_survey);
 
 Vue.router = new VueRouter({
   hashbang: false,

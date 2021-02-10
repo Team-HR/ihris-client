@@ -9,8 +9,10 @@
         </v-list-item-avatar>
 
         <v-list-item-content>
-          <v-list-item-title>Valencia, Franz Joshua</v-list-item-title>
-          <v-list-item-subtitle>System Administrator</v-list-item-subtitle>
+          <v-list-item-title>
+            {{user.name}}
+          </v-list-item-title>
+          <v-list-item-subtitle>{{role}}</v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
 
@@ -85,6 +87,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   props: {
     drawn: Boolean
@@ -99,39 +103,75 @@ export default {
       drawer: true,
       items: [
         { heading: "Navigation" },
-        { icon: "mdi-home-circle-outline", text: "Home", path: "/" },
-        { icon: "mdi-guitar-acoustic", text: "Talent Assessment", path: "/talent-assessment" },
+         {
+          icon: "mdi-chevron-up",
+          "icon-alt": "mdi-chevron-down",
+          text: "Rewards & Recognition",
+          model: true,
+          children: [
+            {
+              icon: "mdi-lead-pencil",
+              text: "System Review Survey",
+              path: "/rnr-survey"
+            },
+            {
+              icon: "mdi-pencil-ruler",
+              text: "Setup System Review Survey",
+              path: "/rnr-survey-setup"
+            },
+          ]
+        },
+        // { icon: "mdi-home-circle-outline", text: "Rewards & Recognition", path: "/" },
+        // { icon: "mdi-home-circle-outline", text: "Home", path: "/" },
+        // { icon: "mdi-guitar-acoustic", text: "Talent Assessment", path: "/talent-assessment" },
         // { icon: "mdi-view-dashboard", text: "Cores", path: "/cores" },
         // {
         //   icon: "mdi-account-box-multiple-outline",
         //   text: "Employees",
         //   path: "/employees"
         // },
-        { heading: "System Administration" },
-        {
-          icon: "mdi-chevron-up",
-          "icon-alt": "mdi-chevron-down",
-          text: "Accounts Management",
-          model: false,
-          children: [
-            {
-              icon: "mdi-account-settings-outline",
-              text: "User Accounts",
-              path: "/user-accounts"
-            },
-            {
-              icon: "mdi-account-group-outline",
-              text: "User Groups",
-              path: "/user-groups"
-            }
-          ]
-        },
-        { icon: "mdi-cog", text: "Settings" }
+        // { heading: "System Administration" },
+        // {
+        //   icon: "mdi-chevron-up",
+        //   "icon-alt": "mdi-chevron-down",
+        //   text: "Accounts Management",
+        //   model: false,
+        //   children: [
+        //     {
+        //       icon: "mdi-account-settings-outline",
+        //       text: "User Accounts",
+        //       path: "/user-accounts"
+        //     },
+        //     {
+        //       icon: "mdi-account-group-outline",
+        //       text: "User Groups",
+        //       path: "/user-groups"
+        //     }
+        //   ]
+        // },
+        // { icon: "mdi-cog", text: "Settings" }
       ]
     };
   },
+  computed: {
+    // user_name(){
+    //   return this.$store.getters.auth.user.name
+    // }
+    ...mapGetters({
+      user: "auth/user"
+    }),
+    role(){
+      const role = this.user.roles[0]?this.user.roles[0]:'---'
+      if (role == 'sys_admin') {
+        return 'System Administrator'
+      }
+      return role;
+    }
+  
+  },
   mounted() {
     this.initialize;
+    console.log(this.user)
   },
   methods: {
     initialize() {
