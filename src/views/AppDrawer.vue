@@ -5,12 +5,13 @@
     <v-list>
       <v-list-item two-line>
         <v-list-item-avatar>
-          <img src="https://randomuser.me/api/portraits/men/81.jpg" />
+          <!-- <img src="https://randomuser.me/api/portraits/men/81.jpg" /> -->
+          <v-icon large>mdi-account-circle</v-icon>
         </v-list-item-avatar>
 
         <v-list-item-content>
-          <v-list-item-title>Valencia, Franz Joshua</v-list-item-title>
-          <v-list-item-subtitle>System Administrator</v-list-item-subtitle>
+          <v-list-item-title>{{ $auth.user().name}}</v-list-item-title>
+          <v-list-item-subtitle>{{$auth.user().roles}}</v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
 
@@ -100,6 +101,7 @@ export default {
       items: [
         { heading: "Navigation" },
         { icon: "mdi-home-circle-outline", text: "Home", path: "/" },
+        { icon: "mdi-pencil-ruler", text: "Competency", path: "/competency" },
         { icon: "mdi-view-dashboard", text: "Cores", path: "/cores" },
         {
           icon: "mdi-account-box-multiple-outline",

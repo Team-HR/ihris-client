@@ -10,6 +10,7 @@ import auth from "./auth";
 import errors from "./errors";
 import accs from "./accounts_management";
 import emps from "./employees";
+import comp from "./competency";
 
 const routes = [
   { path: "*", redirect: "/404" },
@@ -18,7 +19,13 @@ const routes = [
     name: "cores",
     component: Cores,
     meta: {
-      auth: true
+      // auth: true
+      auth: {
+        roles: ["sys_admin"],
+        redirect: "/login",
+        notFoundRedirect: "/404",
+        forbiddenRedirect: "/403"
+      }
     }
   },
   {
@@ -29,7 +36,7 @@ const routes = [
       auth: true
     }
   }
-].concat(auth, errors, accs, emps);
+].concat(auth, errors, accs, emps, comp);
 
 Vue.router = new VueRouter({
   hashbang: false,
