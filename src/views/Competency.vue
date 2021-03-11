@@ -2,6 +2,64 @@
   <div>
     <v-row>
       <v-col cols="12" sm="12" md="6" class="mx-auto">
+        <span>
+          <v-btn color="primary" dark @click="dialog = true" text dense>
+            Pick
+          </v-btn>
+
+          {{ peers[subjectIndex].name }}
+        </span>
+        <v-dialog
+          v-model="dialog"
+          fullscreen
+          hide-overlay
+          transition="dialog-bottom-transition"
+        >
+          <!-- <template v-slot:activator="{ on, attrs }">
+            <v-btn color="primary" dark v-bind="attrs" v-on="on" >
+              Change
+            </v-btn>
+          </template> -->
+
+          <v-card>
+            <v-toolbar dark color="primary">
+              <v-btn icon dark @click="dialog = false">
+                <v-icon>mdi-close</v-icon>
+              </v-btn>
+              <v-toolbar-title>Pick Personnel to Assess</v-toolbar-title>
+              <v-spacer></v-spacer>
+              <v-toolbar-items>
+                <!-- <v-btn
+              dark
+              text
+              @click="dialog = false"
+            >
+              Save
+            </v-btn> -->
+              </v-toolbar-items>
+            </v-toolbar>
+
+            <v-radio-group v-model="subjectIndex" class="ml-5" @change="e1 = 1">
+              <v-radio v-for="(peer, n) in peers" :key="n" :value="n">
+                <template v-slot:label>
+                  <div>
+                    {{ n + 1 }}.
+                    <span
+                      :class="isComplete(n) ? 'green--text' : 'grey--text'"
+                      class="pr-2"
+                      >{{ peer.name }}</span
+                    >
+                    <v-icon v-if="isComplete(n)" color="success"
+                      >mdi-check</v-icon
+                    >
+                    <v-icon v-else color="red">mdi-cancel</v-icon>
+                  </div>
+                </template>
+              </v-radio>
+            </v-radio-group>
+          </v-card>
+        </v-dialog>
+
         <v-stepper v-model="e1">
           <v-stepper-items>
             <v-stepper-content
@@ -10,66 +68,63 @@
               :step="i + 1"
             >
               <!-- start of card form -->
-              <v-card class="ma-0 elevation-0" color="white lighten-1">
-                <h3>
-                  {{ i + 1 }}
-                  <span style="font-size: 10px; color: grey">of 24</span>.)
-                  {{ item.title }}
-                </h3>
-                <p style="font-size:14px;">
-                  <i>{{ item.description }}</i>
-                </p >
-                
+              <!-- <v-card class="ma-0 elevation-0" color="white lighten-1"> -->
+              <!-- name of subject here -->
+              <!-- button for dialog here -->
+              <!-- dialog here -->
 
-                <v-simple-table dense>
-                  <template v-slot:default>
-                    <thead>
-                      <tr>
-                        <th class="text-left">Level</th>
-                        <th class="text-left">
-                          Proficiency/ Mastery Level Behavioral Indicators
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr v-for="(level, k) in item.levels" :key="k">
-                        <td style="white-space: nowrap">
-                          <v-checkbox
-                            v-model="selected[i]"
-                            :value="k+1"
-                            :label="`Level ${k + 1}`"
-                          />
-                        </td>
-                        <td>{{ level.proficiency }}</td>
-                      </tr>
-                    </tbody>
-                  </template>
-                </v-simple-table>
+              <h3>
+                {{ i + 1 }}
+                <span style="font-size: 10px; color: grey">of 24</span>.)
+                {{ item.title }}
+              </h3>
+              <p style="font-size: 14px">
+                <i>{{ item.description }}</i>
+              </p>
 
+              <v-simple-table dense>
+                <template v-slot:default>
+                  <thead>
+                    <tr>
+                      <th class="text-left">Level</th>
+                      <th class="text-left">
+                        Proficiency/ Mastery Level Behavioral Indicators
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="(level, k) in item.levels" :key="k">
+                      <td style="white-space: nowrap">
+                        <v-checkbox
+                          v-model="peers[subjectIndex].data[i]"
+                          :value="k + 1"
+                          :label="`Level ${k + 1}`"
+                        />
+                      </td>
+                      <td>{{ level.proficiency }}</td>
+                    </tr>
+                  </tbody>
+                </template>
+              </v-simple-table>
+              <!-- </v-card> -->
+              <!-- <v-card-actions> -->
 
+              <v-btn color="primary" @click="nextStep(i + 1)" text>
+                Continue
+              </v-btn>
 
+              <v-btn
+                v-if="i + 1 !== 1"
+                color="primary"
+                @click="backStep(i + 1)"
+                text
+              >
+                Back
+              </v-btn>
 
-
-              </v-card>
-              <v-card-actions>
-
-                <v-btn color="primary" @click="nextStep(i + 1)" text>
-                  Continue
-                </v-btn>
-
-                <v-btn
-                  v-if="i + 1 !== 1"
-                  color="primary"
-                  @click="backStep(i + 1)"
-                  text
-                >
-                  Back
-                </v-btn>
-
-                <v-btn color="primary" @click="logMe()" text> log </v-btn>
-                <!-- <v-spacer></v-spacer> -->
-
-              </v-card-actions>
+              <v-btn color="primary" @click="logMe()" text> log </v-btn>
+              <!-- <v-spacer></v-spacer> -->
+              <!-- </v-card-actions> -->
               <!-- end of card form -->
 
               <!-- <v-btn text>
@@ -80,6 +135,9 @@
         </v-stepper>
       </v-col>
     </v-row>
+    <v-snackbar v-model="snackbarToContinue" centered color="red" timeout="2000">
+      <v-icon>mdi-alert-decagram-outline</v-icon> Please select level to continue!
+    </v-snackbar>
   </div>
 </template>
 
@@ -87,28 +145,38 @@
 // import { mapGetters } from "vuex";
 export default {
   //   computed: mapGetters({ testing: "getTesting" }),
-  methods: {
-    logMe() {
-      console.log("selected: ", this.selected);
-    },
-    nextStep(n) {
-      if (n === this.steps) {
-        this.e1 = 1;
-      } else {
-        this.e1 = n + 1;
-      }
-    },
-    backStep(n) {
-      if (n === 1) {
-        this.e1 = 1;
-      } else {
-        this.e1 = n - 1;
-      }
-    },
-  },
+
   data() {
     return {
-      selected: [1,2,3,4,5,],
+      snackbarToContinue: false,
+      dialog: false,
+      subjectIndex: 0,
+      peers_empty: [
+        {
+          employee_id: 0,
+          name: "",
+          data: [],
+        },
+      ],
+      peers: [
+        {
+          employee_id: 4568,
+          name: "Jane Doe",
+          data: [
+            2,2,2,3,3,3,4,4,5,3,1,2,2,1,3,4,5,6,3,2,1,2,3,4,
+          ],
+        },
+        {
+          employee_id: 8977,
+          name: "Abceedee Efgee",
+          data: [],
+        },
+        {
+          employee_id: 1394,
+          name: "Joshua Val",
+          data: [],
+        },
+      ],
       e1: 1,
       steps: 24,
       // beginning of competencies
@@ -1328,6 +1396,36 @@ export default {
       ],
       // end of competencies
     };
+  },
+  methods: {
+    isComplete(i) {
+      return this.peers[i].data.length == 24 ? true : false;
+    },
+    logMe() {
+      console.log("data: ", this.peers[this.subjectIndex].data);
+      console.log("subjectIndex: ", this.subjectIndex);
+    },
+    nextStep(n) {
+      // console.log(this.peers[this.subjectIndex].data[n]?true:false);
+      // console.log();
+      if (this.peers[this.subjectIndex].data[n-1]) {
+        if (n === this.steps) {
+          this.e1 = 1;
+        } else {
+          this.e1 = n + 1;
+        }
+      } else {
+        this.snackbarToContinue = true
+      }
+
+    },
+    backStep(n) {
+      if (n === 1) {
+        this.e1 = 1;
+      } else {
+        this.e1 = n - 1;
+      }
+    },
   },
 };
 </script>
