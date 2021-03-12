@@ -135,13 +135,25 @@
         </v-stepper>
       </v-col>
     </v-row>
-    <v-snackbar v-model="snackbarToContinue" centered color="red" timeout="2000">
-      <v-icon>mdi-alert-decagram-outline</v-icon> Please select level to continue!
+    <v-snackbar
+      v-model="snackbarToContinue"
+      centered
+      color="red"
+      timeout="2000"
+    >
+      <v-icon>mdi-alert-decagram-outline</v-icon> Please select level to
+      continue!
     </v-snackbar>
   </div>
 </template>
 
 <script>
+
+  window.addEventListener("load", function(event) {
+    // here is the Vue code
+    console.log("loaded!");
+  });
+
 // import { mapGetters } from "vuex";
 export default {
   //   computed: mapGetters({ testing: "getTesting" }),
@@ -163,7 +175,30 @@ export default {
           employee_id: 4568,
           name: "Jane Doe",
           data: [
-            2,2,2,3,3,3,4,4,5,3,1,2,2,1,3,4,5,6,3,2,1,2,3,4,
+            2,
+            2,
+            2,
+            3,
+            3,
+            3,
+            4,
+            4,
+            5,
+            3,
+            1,
+            2,
+            2,
+            1,
+            3,
+            4,
+            5,
+            6,
+            3,
+            2,
+            1,
+            2,
+            3,
+            4,
           ],
         },
         {
@@ -1397,6 +1432,9 @@ export default {
       // end of competencies
     };
   },
+  created() {
+    this.competencies = Object.freeze(this.competencies);
+  },
   methods: {
     isComplete(i) {
       return this.peers[i].data.length == 24 ? true : false;
@@ -1408,16 +1446,15 @@ export default {
     nextStep(n) {
       // console.log(this.peers[this.subjectIndex].data[n]?true:false);
       // console.log();
-      if (this.peers[this.subjectIndex].data[n-1]) {
+      if (this.peers[this.subjectIndex].data[n - 1]) {
         if (n === this.steps) {
           this.e1 = 1;
         } else {
           this.e1 = n + 1;
         }
       } else {
-        this.snackbarToContinue = true
+        this.snackbarToContinue = true;
       }
-
     },
     backStep(n) {
       if (n === 1) {
@@ -1426,7 +1463,7 @@ export default {
         this.e1 = n - 1;
       }
     },
-  },
+  }
 };
 </script>
 
