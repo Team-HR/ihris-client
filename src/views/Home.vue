@@ -10,7 +10,10 @@
 <script>
 import { mapGetters } from "vuex";
 export default {
-  computed: mapGetters({ testing: "getTesting" })
+  computed: mapGetters({ testing: "getTesting" }),
+  mounted() {
+    console.log(this.$store.getters["auth/user"]);
+  },
 };
 </script>
 
