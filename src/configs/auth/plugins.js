@@ -42,7 +42,7 @@ Vue.use(auth, {
   loginData: {
     url: "auth/login",
     method: "POST",
-    redirect: "/competency",
+    redirect: "/assessments",
     fetchUser: true,
     staySignedIn: true
   },

@@ -18,7 +18,7 @@ export default {
 
     login(ctx, data) {
       data = data || {};
-      console.log(data);
+      // console.log(data);
       return new Promise((resolve, reject) => {
         Vue.auth
           .login({

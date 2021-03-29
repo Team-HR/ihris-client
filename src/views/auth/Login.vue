@@ -59,9 +59,11 @@ export default {
   methods: {
     login() {
       // console.log(this.form);
-      this.$store.dispatch("auth/login", this.form).catch(res => {
+      this.$store.dispatch("auth/login", this.form).catch(error => {
         // console.log(res);
-        this.errors = Object.assign({}, res.errors);
+        // this.errors = Object.assign({}, res.errors);
+        console.log(error[0].status)
+        
       });
     },
     reset() {

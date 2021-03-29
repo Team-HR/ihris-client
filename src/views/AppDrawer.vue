@@ -101,7 +101,8 @@ export default {
       items: [
         { heading: "Navigation" },
         { icon: "mdi-home-circle-outline", text: "Home", path: "/" },
-        { icon: "mdi-pencil-ruler", text: "Competency", path: "/competency" },
+        // { icon: "mdi-pencil-ruler", text: "Competency Assessment", path: "/competency" },
+        { icon: "mdi-pencil-ruler", text: "Assessments", path: "/assessments" },
         { icon: "mdi-view-dashboard", text: "Cores", path: "/cores" },
         {
           icon: "mdi-account-box-multiple-outline",
