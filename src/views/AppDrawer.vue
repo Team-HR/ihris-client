@@ -11,7 +11,7 @@
 
         <v-list-item-content>
           <v-list-item-title>{{ $auth.user().name}}</v-list-item-title>
-          <v-list-item-subtitle>{{$auth.user().roles}}</v-list-item-subtitle>
+          <!-- <v-list-item-subtitle>{{$auth.user().roles}}</v-list-item-subtitle> -->
         </v-list-item-content>
       </v-list-item>
 
@@ -100,35 +100,36 @@ export default {
       drawer: true,
       items: [
         { heading: "Navigation" },
-        { icon: "mdi-home-circle-outline", text: "Home", path: "/" },
+        // { icon: "mdi-home-circle-outline", text: "Home", path: "/" },
         // { icon: "mdi-pencil-ruler", text: "Competency Assessment", path: "/competency" },
         { icon: "mdi-pencil-ruler", text: "Assessments", path: "/assessments" },
-        { icon: "mdi-view-dashboard", text: "Cores", path: "/cores" },
-        {
-          icon: "mdi-account-box-multiple-outline",
-          text: "Employees",
-          path: "/employees"
-        },
-        { heading: "System Administration" },
-        {
-          icon: "mdi-chevron-up",
-          "icon-alt": "mdi-chevron-down",
-          text: "Accounts Management",
-          model: false,
-          children: [
-            {
-              icon: "mdi-account-settings-outline",
-              text: "User Accounts",
-              path: "/user-accounts"
-            },
-            {
-              icon: "mdi-account-group-outline",
-              text: "User Groups",
-              path: "/user-groups"
-            }
-          ]
-        },
-        { icon: "mdi-cog", text: "Settings" }
+        // { icon: "", text: "Staff Management", path: "/staff-management" },
+        // { icon: "mdi-view-dashboard", text: "Cores", path: "/cores" },
+        // {
+        //   icon: "mdi-account-box-multiple-outline",
+        //   text: "Employees",
+        //   path: "/employees"
+        // },
+        // { heading: "System Administration" },
+        // {
+        //   icon: "mdi-chevron-up",
+        //   "icon-alt": "mdi-chevron-down",
+        //   text: "Accounts Management",
+        //   model: false,
+        //   children: [
+        //     {
+        //       icon: "mdi-account-settings-outline",
+        //       text: "User Accounts",
+        //       path: "/user-accounts"
+        //     },
+        //     {
+        //       icon: "mdi-account-group-outline",
+        //       text: "User Groups",
+        //       path: "/user-groups"
+        //     }
+        //   ]
+        // },
+        // { icon: "mdi-cog", text: "Settings" }
       ]
     };
   },

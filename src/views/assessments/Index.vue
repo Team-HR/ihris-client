@@ -11,21 +11,26 @@
       <v-col cols="12" sm="12" md="6" class="mx-auto">
         <!-- <v-card> -->
 
-        <v-card class="mt-2">
-          <v-card-title primary-title> Competency Assessment </v-card-title>
-          <v-card-subtitle
-            >Status: <span class="red--text">Incomplete</span></v-card-subtitle
-          >
-          <v-card-text>
-            Assessment for supervisors assessing their subordinates'
-            competencies.
-          </v-card-text>
-          <v-card-actions>
-            <v-btn color="success" to="/assessments/1" text>Start</v-btn>
-            <v-btn color="primary" text>Personnels</v-btn>
-          </v-card-actions>
-        </v-card>
-
+        <template v-for="(assessment, index) in assessments">
+          <v-card :key="index" class="mt-2">
+            <v-card-title primary-title>
+              {{ assessment.title }}
+            </v-card-title>
+            <v-card-subtitle
+              >Status:
+              <span class="red--text">{{
+                assessment.status
+              }}</span></v-card-subtitle
+            >
+            <v-card-text>
+              {{assessment.description}}
+            </v-card-text>
+            <v-card-actions>
+              <v-btn color="success" :to="`/assessments/${assessment.id}`">Start</v-btn>
+              <v-btn color="primary" :to="`/assessments/personnels/${assessment.id}`">Personnels</v-btn>
+            </v-card-actions>
+          </v-card>
+        </template>
         <!-- </v-card> -->
       </v-col>
     </v-row>
@@ -35,7 +40,16 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      assessments: [
+        {
+          id: 1,
+          title: "Competency Assessment",
+          description: "Assessment for supervisors assessing their subordinates' competencies.",
+          status: "Incomplete",
+        },
+      ],
+    };
   },
   mounted() {},
   watch: {},

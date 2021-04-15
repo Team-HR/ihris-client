@@ -8,11 +8,11 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+// import { mapGetters } from "vuex";
 export default {
-  computed: mapGetters({ testing: "getTesting" }),
+  // computed: mapGetters({ testing: "getTesting" }),
   mounted() {
-    console.log(this.$store.getters["auth/user"]);
+    // console.log(this.$store.getters["auth/user"]);
   },
 };
 </script>
