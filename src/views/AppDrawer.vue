@@ -101,6 +101,7 @@ export default {
       items: [
         { heading: "Navigation" },
         // { icon: "mdi-home-circle-outline", text: "Home", path: "/" },
+
         // { icon: "mdi-pencil-ruler", text: "Competency Assessment", path: "/competency" },
         { icon: "mdi-pencil-ruler", text: "Assessments", path: "/assessments" },
         // { icon: "", text: "Staff Management", path: "/staff-management" },
@@ -110,25 +111,43 @@ export default {
         //   text: "Employees",
         //   path: "/employees"
         // },
-        // { heading: "System Administration" },
-        // {
-        //   icon: "mdi-chevron-up",
-        //   "icon-alt": "mdi-chevron-down",
-        //   text: "Accounts Management",
-        //   model: false,
-        //   children: [
-        //     {
-        //       icon: "mdi-account-settings-outline",
-        //       text: "User Accounts",
-        //       path: "/user-accounts"
-        //     },
-        //     {
-        //       icon: "mdi-account-group-outline",
-        //       text: "User Groups",
-        //       path: "/user-groups"
-        //     }
-        //   ]
-        // },
+        { heading: "System Administration" },
+        {
+          icon: "mdi-chevron-up",
+          "icon-alt": "mdi-chevron-down",
+          text: "Accounts Management",
+          model: false,
+          children: [
+            {
+              icon: "mdi-account-settings-outline",
+              text: "User Accounts",
+              path: "/user-accounts"
+            },
+            {
+              icon: "mdi-account-group-outline",
+              text: "User Groups",
+              path: "/user-groups"
+            }
+          ]
+        },
+             {
+          icon: "mdi-chevron-up",
+          "icon-alt": "mdi-chevron-down",
+          text: "Office Setup",
+          model: false,
+          children: [
+                {
+              icon: "mdi-account-supervisor-circle-outline",
+              text: "Departments",
+              path: "/department-setup"
+            },
+            {
+              icon: "mdi-account-supervisor-circle-outline",
+              text: "Supervisors",
+              path: "/office-staff-management"
+            },
+          ]
+        },
         // { icon: "mdi-cog", text: "Settings" }
       ]
     };
