@@ -13,6 +13,7 @@ import emps from "./employees";
 import comp from "./competency";
 import assessments from "./assessments";
 import office_staff_management from "./office_staff_management.js";
+import departments from "./departments.js";
 
 const routes = [
     { path: "*", redirect: "/404" },
@@ -37,8 +38,8 @@ const routes = [
         meta: {
             auth: true
         }
-    }
-].concat(auth, errors, accs, emps, comp, assessments, office_staff_management);
+    },
+].concat(auth, errors, accs, emps, comp, assessments, office_staff_management, departments);
 
 Vue.router = new VueRouter({
     hashbang: false,

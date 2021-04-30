@@ -10,7 +10,7 @@
         </v-list-item-avatar>
 
         <v-list-item-content>
-          <v-list-item-title>{{ $auth.user().name}}</v-list-item-title>
+          <v-list-item-title>{{ $auth.user().name }}</v-list-item-title>
           <!-- <v-list-item-subtitle>{{$auth.user().roles}}</v-list-item-subtitle> -->
         </v-list-item-content>
       </v-list-item>
@@ -88,12 +88,12 @@
 <script>
 export default {
   props: {
-    drawn: Boolean
+    drawn: Boolean,
   },
   watch: {
-    drawn: function() {
+    drawn: function () {
       this.drawer = !this.drawer;
-    }
+    },
   },
   data() {
     return {
@@ -121,35 +121,35 @@ export default {
             {
               icon: "mdi-account-settings-outline",
               text: "User Accounts",
-              path: "/user-accounts"
+              path: "/user-accounts",
             },
             {
               icon: "mdi-account-group-outline",
               text: "User Groups",
-              path: "/user-groups"
-            }
-          ]
+              path: "/user-groups",
+            },
+          ],
         },
-             {
+        {
           icon: "mdi-chevron-up",
           "icon-alt": "mdi-chevron-down",
           text: "Office Setup",
           model: false,
           children: [
-                {
+            {
               icon: "mdi-account-supervisor-circle-outline",
               text: "Departments",
-              path: "/department-setup"
+              path: "/departments",
             },
             {
               icon: "mdi-account-supervisor-circle-outline",
               text: "Supervisors",
-              path: "/office-staff-management"
+              path: "/office-staff-management",
             },
-          ]
+          ],
         },
         // { icon: "mdi-cog", text: "Settings" }
-      ]
+      ],
     };
   },
   mounted() {
@@ -158,7 +158,7 @@ export default {
   methods: {
     initialize() {
       console.log(this.items);
-    }
-  }
+    },
+  },
 };
 </script>
