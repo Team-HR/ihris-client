@@ -111,42 +111,30 @@ export default {
         //   text: "Employees",
         //   path: "/employees"
         // },
-        { heading: "System Administration" },
+        // { heading: "System Administration" },
+        // {
+        //   icon: "mdi-chevron-up",
+        //   "icon-alt": "mdi-chevron-down",
+        //   text: "Accounts Management",
+        //   model: false,
+        //   children: [
+        //     {
+        //       icon: "mdi-account-settings-outline",
+        //       text: "User Accounts",
+        //       path: "/user-accounts",
+        //     },
+        //     {
+        //       icon: "mdi-account-group-outline",
+        //       text: "User Groups",
+        //       path: "/user-groups",
+        //     },
+        //   ],
+        // },
+        { heading: "Office Setup" },
         {
-          icon: "mdi-chevron-up",
-          "icon-alt": "mdi-chevron-down",
-          text: "Accounts Management",
-          model: false,
-          children: [
-            {
-              icon: "mdi-account-settings-outline",
-              text: "User Accounts",
-              path: "/user-accounts",
-            },
-            {
-              icon: "mdi-account-group-outline",
-              text: "User Groups",
-              path: "/user-groups",
-            },
-          ],
-        },
-        {
-          icon: "mdi-chevron-up",
-          "icon-alt": "mdi-chevron-down",
-          text: "Office Setup",
-          model: false,
-          children: [
-            {
-              icon: "mdi-account-supervisor-circle-outline",
-              text: "Departments",
-              path: "/departments",
-            },
-            {
-              icon: "mdi-account-supervisor-circle-outline",
-              text: "Supervisors",
-              path: "/office-staff-management",
-            },
-          ],
+          icon: "mdi-account-supervisor-circle-outline",
+          text: "Departments",
+          path: "/departments",
         },
         // { icon: "mdi-cog", text: "Settings" }
       ],

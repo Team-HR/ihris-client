@@ -1,20 +1,21 @@
 <template>
   <div>
     <v-row>
-      <v-col cols="12" sm="12" md="6" class="mx-auto" :hidden="hideAddTable">
+      <v-col cols="12" sm="12" md="12" class="mx-auto" :hidden="hideAddTable">
         <!-- selection table start -->
         <v-data-table
           :headers="selection.headers"
           :items="selection.items"
           :search="selection.search"
           sort-by="full_name"
-          class="elevation-1"
+          class="elevation-0"
           dense
         >
           <template v-slot:top>
             <v-toolbar flat>
+              <v-btn color="red" text class="mr-2" @click="hideAddTable = true">Done</v-btn>
               <v-toolbar-title>
-                Add Personnel
+                Add Subordinates
               </v-toolbar-title>
               <v-divider inset vertical class="ma-2"/>
               
@@ -37,14 +38,14 @@
         </v-data-table>
         <!-- selection table end -->
       </v-col>
-      <v-col cols="12" sm="12" md="6" class="mx-auto">
+      <v-col cols="12" sm="12" md="12" class="mx-auto">
         <!-- selected table start -->
         <v-data-table
           :headers="selected.headers"
           :items="selected.items"
           :search="selected.search"
           sort-by="full_name"
-          class="elevation-1"
+          class="elevation-0"
           dense
           disable-pagination
           hide-default-footer
@@ -53,17 +54,18 @@
             <v-toolbar flat>
               <v-btn color="success" text class="mr-2" @click="hideAddTable = !hideAddTable">{{hideAddTable?'Add':'Done Adding'}}</v-btn>
               <v-toolbar-title>
-                Selected Personnel
+                Subordinates
               </v-toolbar-title>
               <v-divider inset vertical class="ma-2"/>
               
               <v-text-field
+                v-if="selected.items.length > 0"
                 hide-details
                 dense
                 v-model="selected.search"
                 outlined
                 label="Search"
-                placeholder="Enter employee name to search..."
+                placeholder="Search subordinate by name..."
                 clearable
               ></v-text-field>
             </v-toolbar>
@@ -148,11 +150,12 @@ export default {
     initialize() {
       // items = JSON.parse(JSON.stringify(this.dataItems))
       // console.log(items);
-      this.axios
+      this.axios                                
         .get("competency/free_employees")
         .then((res) => {
           // console.log(res)
           this.selection.items = res.data;
+          console.log(res.data);
         })
         .then((res) => {
           // this.supervisor.isLoading = false;
@@ -181,6 +184,7 @@ export default {
         this.selection.items.push(item);
         this.selected.search = null;
       }
+      this.$emit('changedSelected',this.selected.items) 
     },
   },
 };
