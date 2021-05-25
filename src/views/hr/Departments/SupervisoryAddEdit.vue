@@ -9,7 +9,7 @@
       <v-btn
         text
         color="primary"
-        :to="`/department/offices/${department_id}/supervisory/${id}`"
+        :to="`/department/offices/${department_id}/supervisory/${office_id}`"
       >
         <v-icon>mdi-chevron-double-left</v-icon>
         Back
@@ -66,7 +66,8 @@ export default {
   },
   data() {
     return {
-      id: 0,
+      superior_id: 0,
+      office_id: 0,
       department_id: 0,
       department: "",
       office: "",
@@ -82,7 +83,20 @@ export default {
   },
   mounted() {
     // console.log(this.$route.params.id);
-    this.id = this.$route.params.id;
+    this.superior_id = this.$route.params.superior_id;
+
+    if (this.superior_id) {
+      console.log("Edit")
+      this.superior_id = this.superior_id
+      this.axios.get("/superior/"+this.superior_id).then(res=>{
+        console.log("superior_data:",res.data);
+      })
+
+    } else {
+      console.log("Add")
+    }
+
+    this.office_id = this.$route.params.office_id;
     this.department_id = this.$route.params.department_id;
     // this.getDepartmentInfo();
     this.getOfficeInfo();
@@ -115,7 +129,7 @@ export default {
         superior_id: this.supervisor.id,
         superior_employee_id: this.supervisor.model.employee_id,
         subordinates: null,
-        office_id: this.id
+        office_id: this.office_id
       };
       if (this.subordinates.length > 0) {
         payload.subordinates = this.subordinates;
@@ -124,9 +138,10 @@ export default {
       // console.log(payload);
 
       this.axios
-        .post("/competency/create_superior", payload)
+        .post("/superior/create", payload)
         .then((res) => {
           console.log('axios then:',res.data)
+          this.$router.push(`/department/offices/${this.department_id}/supervisory/${this.office_id}`)
         })
         .catch((err) => {
           // console.error(err);
@@ -149,9 +164,9 @@ export default {
         });
     },
     getOfficeInfo() {
-      var id = this.id;
+      var office_id = this.office_id;
       this.axios
-        .get("/office/" + id)
+        .get("/office/" + office_id)
         .then((res) => {
           console.log(res.data);
           this.office = res.data.office;

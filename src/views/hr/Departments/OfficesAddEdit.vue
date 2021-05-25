@@ -58,16 +58,19 @@ export default {
       //  check if db already has office name existing
       //  if none, add
       //  else, dont add and return error
-      this.axios.post("departments/office/add-new",{
-        department_id: this.department_id,
-        office: this.office
-      })
-      .then(res => {
-        console.log(res.data)
-      })
-      .catch(err => {
-        console.error(err); 
-      })
+
+      this.axios
+        .post("office/add-new", {
+          department_id: this.department_id,
+          office: this.office,
+        })
+        .then((res) => {
+          console.log(res.data);
+          this.$router.push(`/department/offices/${this.department_id}`)
+        })
+        .catch((err) => {
+          console.error(err);
+        });
     },
     getDepartmentInfo() {
       var department_id = this.id;

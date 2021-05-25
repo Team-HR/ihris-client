@@ -34,7 +34,7 @@ const routes = [
     }
   },
   {
-    path: "/department/offices/:department_id/supervisory/:id",
+    path: "/department/offices/:department_id/supervisory/:office_id",
     name: "supervisory",
     component: Supervisory,
     meta: {
@@ -48,7 +48,7 @@ const routes = [
     }
   },
   {
-    path: "/department/offices/:department_id/supervisory/:id/new",
+    path: "/department/offices/:department_id/supervisory/:office_id/new",
     name: "supervisory-new",
     component: SupervisoryAddEdit,
     meta: {
@@ -61,6 +61,21 @@ const routes = [
       }
     }
   },
+  {
+    path: "/department/offices/:department_id/supervisory/:office_id/edit/:superior_id",
+    name: "supervisory-edit",
+    component: SupervisoryAddEdit,
+    meta: {
+      title: "Supervisory-Edit",
+      auth: {
+        roles: ["emp"],
+        redirect: "/login",
+        notFoundRedirect: "/404",
+        forbiddenRedirect: "/403"
+      }
+    }
+  },
+
   {
     path: "/department/offices/:department_id/new",
     name: "office-new",

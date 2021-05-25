@@ -27,47 +27,20 @@
               <v-btn
                 color="success"
                 text
-                :to="`/department/offices/${department_id}/supervisory/${id}/new`"
+                :to="`/department/offices/${department_id}/supervisory/${office_id}/new`"
                 >Add Supervisor</v-btn
               >
               <!-- <v-btn color="success" @click="addNew()">Add Supervisor</v-btn> -->
             </v-toolbar>
           </template>
           <template v-slot:[`item.actions`]="{ item }">
-            <v-btn text color="primary" :to="`/supervisors/${item.id}`">
+            <v-btn text color="primary" :to="`/department/offices/${department_id}/supervisory/${office_id}/edit/${item.id}`">
               <v-icon small> mdi-pencil </v-icon>
-              Supervisors
+               Edit
             </v-btn>
           </template>
           <template v-slot:no-data> No Data Found! </template>
         </v-data-table>
-        <!-- dialogs starts here -->
-        <!-- add/edit dialog start -->
-        <v-dialog v-model="dialog">
-          <v-card>
-            <v-card-title class="headline grey lighten-5">
-              Add/Edit Supervisor
-            </v-card-title>
-             <v-card-text>
-      Explore hundreds of free API's ready for consumption! For more information visit
-      <a
-        class="grey--text text--lighten-3"
-        href="https://github.com/toddmotto/public-apis"
-        target="_blank"
-      >the Github repository</a>.
-    </v-card-text>
-            <v-card-text>
-             
-            </v-card-text>
-            <v-divider></v-divider>
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="primary" text @click="saveEdit()"> Save </v-btn>
-              <v-btn color="red" text @click="cancelEdit()"> Cancel </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
-        <!-- add/edit dialog end -->
         <!-- content here end -->
       </v-col>
     </v-row>
@@ -78,7 +51,7 @@
 export default {
   data() {
     return {
-      id: 0,
+      office_id: 0,
       department_id: 0,
       department: "",
       office: "",
@@ -95,7 +68,7 @@ export default {
           text: "Supervisor",
           align: "start",
           // sortable: false,
-          value: "supervisor",
+          value: "full_name",
         },
       ],
 
@@ -119,10 +92,10 @@ export default {
       // get office supervisors
       this.axios({
         method: "get",
-        url: "/office/supervisors/" + this.id,
+        url: "/superior/list/" + this.office_id,
       }).then((res) => {
         console.log(res.data);
-        // this.items = res.data;
+        this.items = res.data;
       });
     },
     getDepartmentInfo() {
@@ -138,9 +111,9 @@ export default {
         });
     },
     getOfficeInfo() {
-      var id = this.id;
+      var office_id = this.office_id;
       this.axios
-        .get("/office/" + id)
+        .get("/office/" + office_id)
         .then((res) => {
           console.log(res.data);
           this.office = res.data.office;
@@ -152,8 +125,8 @@ export default {
   },
 
   mounted() {
-    // console.log(this.$route.params.id);
-    this.id = this.$route.params.id;
+    // console.log(this.$route.params.office_id);
+    this.office_id = this.$route.params.office_id;
     this.department_id = this.$route.params.department_id;
     // this.$nextTick(function () {
     this.getDepartmentInfo();

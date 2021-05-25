@@ -87,7 +87,7 @@ export default {
     getItems() {
       this.axios({
         method: "get",
-        url: "/departments/offices/" + this.id,
+        url: "/office/list/" + this.id,
         // data: {
         //   id: this.id
         // }
