@@ -26,10 +26,10 @@
           <v-card-text class="ma-0 pb-0">
             <v-autocomplete
               dense
-              v-model="supervisor.model"
-              :items="supervisor.entries"
-              :loading="supervisor.isLoading"
-              :search-input.sync="supervisor.search"
+              v-model="superior.model"
+              :items="superior.entries"
+              :loading="superior.isLoading"
+              :search-input.sync="superior.search"
               hide-details
               hide-no-data
               hide-selected
@@ -45,7 +45,7 @@
             ></v-autocomplete>
           </v-card-text>
           <v-card-text>
-            <personnel-picker @changedSelected="changedSelected($event)" />
+            <personnel-picker :initItems="subordinates" @changedSelected="changedSelected($event)" />
           </v-card-text>
           <v-card-actions>
             <v-btn text color="success" @click="saveEdit">Save</v-btn>
@@ -72,7 +72,7 @@ export default {
       department: "",
       office: "",
       subordinates: [],
-      supervisor: {
+      superior: {
         id: null,
         entries: [],
         isLoading: false,
@@ -82,41 +82,57 @@ export default {
     };
   },
   mounted() {
+ this.axios
+        .get("/superior/get_free_employees")
+        .then((res) => {
+          console.log("superior_datas_mounted:",res.data)
+          this.superior.entries = res.data;
+        })
+        .then((res) => {
+          this.superior.isLoading = false;
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+
+
     // console.log(this.$route.params.id);
     this.superior_id = this.$route.params.superior_id;
-
-    if (this.superior_id) {
-      console.log("Edit")
-      this.superior_id = this.superior_id
-      this.axios.get("/superior/"+this.superior_id).then(res=>{
-        console.log("superior_data:",res.data);
-      })
-
-    } else {
-      console.log("Add")
-    }
-
     this.office_id = this.$route.params.office_id;
     this.department_id = this.$route.params.department_id;
     // this.getDepartmentInfo();
     this.getOfficeInfo();
+
+    if (this.superior_id) {
+      // console.log("Edit, ", this.superior_id)
+      this.superior_id = this.superior_id
+      this.axios.get("/superior/get_info/"+this.superior_id).then(res=>{
+        console.log("superior_data:",res.data);
+        this.superior.id = res.data.id;
+        this.superior.model = {employee_id:res.data.employee_id}
+        console.log("this.superior_id:",this.superior)
+        this.subordinates = Object.assign([],res.data.subordinates)
+      })
+    } else {
+      console.log("Add")
+    }
+
   },
-  computed: {},
   watch: {
-    "supervisor.search"(val) {
+    "superior.search"(val) {
       // Items have already been loaded
-      if (this.supervisor.entries.length > 0) return;
+      if (this.superior.entries.length > 0) return;
       // Items have already been reques ted
-      if (this.supervisor.isLoading) return;
-      this.supervisor.isLoading = true;
+      if (this.superior.isLoading) return;
+      this.superior.isLoading = true;
       this.axios
-        .get("competency/free_employees")
+        .get("superior/get_free_employees")
         .then((res) => {
-          // console.log(res)
-          this.supervisor.entries = res.data;
+          console.log("superior_datas:",res.data)
+          this.superior.entries = res.data;
         })
         .then((res) => {
-          this.supervisor.isLoading = false;
+          this.superior.isLoading = false;
         })
         .catch((err) => {
           console.error(err);
@@ -126,8 +142,8 @@ export default {
   methods: {
     saveEdit() {
       var payload = {
-        superior_id: this.supervisor.id,
-        superior_employee_id: this.supervisor.model.employee_id,
+        superior_id: this.superior.id,
+        superior_employee_id: this.superior.model.employee_id,
         subordinates: null,
         office_id: this.office_id
       };
@@ -135,17 +151,17 @@ export default {
         payload.subordinates = this.subordinates;
         payload.subordinates.forEach((item) => delete item.full_name);
       }
-      // console.log(payload);
+      console.log(payload);
 
-      this.axios
-        .post("/superior/create", payload)
-        .then((res) => {
-          console.log('axios then:',res.data)
-          this.$router.push(`/department/offices/${this.department_id}/supervisory/${this.office_id}`)
-        })
-        .catch((err) => {
-          // console.error(err);
-        });
+      // this.axios
+      //   .post("/superior/create", payload)
+      //   .then((res) => {
+      //     console.log('axios then:',res.data)
+      //     this.$router.push(`/department/offices/${this.department_id}/supervisory/${this.office_id}`)
+      //   })
+      //   .catch((err) => {
+      //     // console.error(err);
+      //   });
     },
     changedSelected(selected) {
       this.subordinates = JSON.parse(JSON.stringify(selected));
@@ -154,7 +170,7 @@ export default {
     getDepartmentInfo() {
       var department_id = this.department_id;
       this.axios
-        .get("/departments/" + department_id)
+        .get("/departments/get_info/" + department_id)
         .then((res) => {
           console.log(res.data);
           this.department = res.data.department;
@@ -166,7 +182,7 @@ export default {
     getOfficeInfo() {
       var office_id = this.office_id;
       this.axios
-        .get("/office/" + office_id)
+        .get("/office/get_info/" + office_id)
         .then((res) => {
           console.log(res.data);
           this.office = res.data.office;

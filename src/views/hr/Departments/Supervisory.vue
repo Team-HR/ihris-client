@@ -92,7 +92,7 @@ export default {
       // get office supervisors
       this.axios({
         method: "get",
-        url: "/superior/list/" + this.office_id,
+        url: "/superior/get_superiors/" + this.office_id,
       }).then((res) => {
         console.log(res.data);
         this.items = res.data;
@@ -101,7 +101,7 @@ export default {
     getDepartmentInfo() {
       var department_id = this.department_id;
       this.axios
-        .get("/departments/" + department_id)
+        .get("/department/get_info/" + department_id)
         .then((res) => {
           console.log(res.data);
           this.department = res.data.department;
@@ -113,7 +113,7 @@ export default {
     getOfficeInfo() {
       var office_id = this.office_id;
       this.axios
-        .get("/office/" + office_id)
+        .get("/office/get_info/" + office_id)
         .then((res) => {
           console.log(res.data);
           this.office = res.data.office;

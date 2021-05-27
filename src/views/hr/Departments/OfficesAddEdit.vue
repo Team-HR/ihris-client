@@ -60,7 +60,7 @@ export default {
       //  else, dont add and return error
 
       this.axios
-        .post("office/add-new", {
+        .post("office/create", {
           department_id: this.department_id,
           office: this.office,
         })
@@ -75,7 +75,7 @@ export default {
     getDepartmentInfo() {
       var department_id = this.id;
       this.axios
-        .get("/departments/" + department_id)
+        .get("/departments/get_info/" + department_id)
         .then((res) => {
           console.log(res.data);
           this.department = res.data.department;

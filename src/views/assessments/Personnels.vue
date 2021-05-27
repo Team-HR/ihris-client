@@ -169,7 +169,7 @@ export default {
 
     this.axios({
       method: "get",
-      url: "/competency/free_employees",
+      url: "/superior/get_free_employees",
     }).then((res) => {
       this.employees = JSON.parse(JSON.stringify(res.data));
     });
@@ -179,7 +179,7 @@ export default {
     addToList(item) {
       // console.log('from employees index: ',item);
       // this.employees.splice(1,1)
-      this.axios.post('/competency/addPeer',{
+      this.axios.post('/competency/add_peer',{
         employee_id: item.employee_id,
       })
         .then( (response) => {
@@ -223,7 +223,7 @@ export default {
     removeToList() {
 
       console.log(this.theItem);
-      this.axios.post('competency/deletePeer',{
+      this.axios.post('competency/delete_peer',{
         employee: this.theItem
       })
         .then((response)=>{

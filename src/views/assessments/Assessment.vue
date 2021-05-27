@@ -197,7 +197,7 @@ export default {
         methods: {
             getQuestionnaire() {
                     this.axios
-                        .get("/competency/questionnaire")
+                        .get("/competency/get_questionnaire")
                         .then((res) => {
                             this.competencies = Object.assign([], res.data);
                             // console.log(this.competencies);

@@ -87,7 +87,7 @@ export default {
     getItems() {
       this.axios({
         method: "get",
-        url: "/office/list/" + this.id,
+        url: "/office/get_offices/" + this.id,
         // data: {
         //   id: this.id
         // }
@@ -99,7 +99,7 @@ export default {
     getDepartmentInfo() {
       var department_id = this.id;
       this.axios
-        .get("/departments/" + department_id)
+        .get("/department/get_info/" + department_id)
         .then((res) => {
           console.log(res.data);
           this.department = res.data.department;

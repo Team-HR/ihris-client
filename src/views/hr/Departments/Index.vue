@@ -85,7 +85,7 @@ export default {
     getItems() {
       this.axios({
         method: "get",
-        url: "/departments",
+        url: "/department",
       }).then((res) => {
         // console.log(res.data);
         this.items = res.data;

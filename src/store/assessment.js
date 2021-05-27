@@ -46,7 +46,7 @@ export default {
     actions: {
         getPeers({ commit }) {
             return new Promise((resolve, reject) => {
-                Vue.axios.get("/competency/peers")
+                Vue.axios.get("/competency/get_peers")
                     .then(res => {
                         var data = res.data;
                         // console.log(res.data);
@@ -59,7 +59,7 @@ export default {
 // getEmployees not assigned to a supervisor and questionnaire
         getFreeEmployees({commit}) {
             return new Promise((resolve, reject) => {
-                Vue.axios.get("/competency/free_employees")
+                Vue.axios.get("/superior/get_free_employees")
                     .then(res => {  
                         var data = res.data;
                         // console.log(res.data);

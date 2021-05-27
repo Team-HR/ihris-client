@@ -13,12 +13,12 @@
         >
           <template v-slot:top>
             <v-toolbar flat>
-              <v-btn color="red" text class="mr-2" @click="hideAddTable = true">Done</v-btn>
-              <v-toolbar-title>
-                Add Subordinates
-              </v-toolbar-title>
-              <v-divider inset vertical class="ma-2"/>
-              
+              <v-btn color="red" text class="mr-2" @click="hideAddTable = true"
+                >Done</v-btn
+              >
+              <v-toolbar-title> Add Subordinates </v-toolbar-title>
+              <v-divider inset vertical class="ma-2" />
+
               <v-text-field
                 hide-details
                 dense
@@ -52,12 +52,16 @@
         >
           <template v-slot:top>
             <v-toolbar flat>
-              <v-btn color="success" text class="mr-2" @click="hideAddTable = !hideAddTable">{{hideAddTable?'Add':'Done Adding'}}</v-btn>
-              <v-toolbar-title>
-                Subordinates
-              </v-toolbar-title>
-              <v-divider inset vertical class="ma-2"/>
-              
+              <v-btn
+                color="success"
+                text
+                class="mr-2"
+                @click="hideAddTable = !hideAddTable"
+                >{{ hideAddTable ? "Add" : "Done Adding" }}</v-btn
+              >
+              <v-toolbar-title> Subordinates </v-toolbar-title>
+              <v-divider inset vertical class="ma-2" />
+
               <v-text-field
                 v-if="selected.items.length > 0"
                 hide-details
@@ -84,7 +88,7 @@
 <script>
 export default {
   props: {
-    dataItems: Array
+    initItems: Array,
   },
   data: () => ({
     hideAddTable: true,
@@ -141,24 +145,51 @@ export default {
       items: [],
     },
   }),
-
-  created() {
+  
+  watch:{
+    initItems (val){
+      // console.log("old_initItems:",oldVal);
+      // console.log("initItems:",val);
+        // this.supervisor.isLoading = false;
+          if (val.length > 0) {
+            this.selected.items = val//JSON.parse(JSON.stringify(val))
+            // remove employees from initItems in selection.items
+            val.forEach((item) => {
+              var index = this.selection.items
+                .map(function (el) {
+                  return el.employee_id;
+                })
+                .indexOf(item.employee_id);
+              // console.log("index:", index);
+              this.selection.items.splice(index, 1);
+            });
+          }
+    }
+  },
+  
+  mounted() {
+    // this.selected.items = JSON.parse(JSON.stringify(this.initItems))
     this.initialize();
+    // console.log("initialize: ", this.initItems);
+  },
+  created() {
+  
   },
 
   methods: {
     initialize() {
       // items = JSON.parse(JSON.stringify(this.dataItems))
       // console.log(items);
-      this.axios                                
-        .get("competency/free_employees")
+      this.axios
+        .get("superior/get_free_employees")
         .then((res) => {
           // console.log(res)
+          console.log("superior_datas_picker:",res.data)
           this.selection.items = res.data;
-          console.log(res.data);
+          // console.log(res.data);
         })
         .then((res) => {
-          // this.supervisor.isLoading = false;
+        
         })
         .catch((err) => {
           console.error(err);
@@ -184,7 +215,7 @@ export default {
         this.selection.items.push(item);
         this.selected.search = null;
       }
-      this.$emit('changedSelected',this.selected.items) 
+      this.$emit("changedSelected", this.selected.items);
     },
   },
 };
