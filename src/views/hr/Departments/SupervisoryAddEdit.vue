@@ -45,7 +45,10 @@
             ></v-autocomplete>
           </v-card-text>
           <v-card-text>
-            <personnel-picker :initItems="subordinates" @changedSelected="changedSelected($event)" />
+            <personnel-picker
+              :initItems="test"
+              @changedSelected="changedSelected($event)"
+            />
           </v-card-text>
           <v-card-actions>
             <v-btn text color="success" @click="saveEdit">Save</v-btn>
@@ -66,6 +69,7 @@ export default {
   },
   data() {
     return {
+      test: [],
       superior_id: 0,
       office_id: 0,
       department_id: 0,
@@ -82,19 +86,18 @@ export default {
     };
   },
   mounted() {
- this.axios
-        .get("/superior/get_free_employees")
-        .then((res) => {
-          console.log("superior_datas_mounted:",res.data)
-          this.superior.entries = res.data;
-        })
-        .then((res) => {
-          this.superior.isLoading = false;
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-
+    this.axios
+      .get("/superior/get_free_employees")
+      .then((res) => {
+        console.log("superior_datas_mounted:", res.data);
+        this.superior.entries = res.data;
+      })
+      .then((res) => {
+        this.superior.isLoading = false;
+      })
+      .catch((err) => {
+        console.error(err);
+      });
 
     // console.log(this.$route.params.id);
     this.superior_id = this.$route.params.superior_id;
@@ -105,18 +108,31 @@ export default {
 
     if (this.superior_id) {
       // console.log("Edit, ", this.superior_id)
-      this.superior_id = this.superior_id
-      this.axios.get("/superior/get_info/"+this.superior_id).then(res=>{
-        console.log("superior_data:",res.data);
+      this.superior_id = this.superior_id;
+      this.axios.get("/superior/get_info/" + this.superior_id).then((res) => {
+        console.log("superior_data:", res.data);
         this.superior.id = res.data.id;
-        this.superior.model = {employee_id:res.data.employee_id}
-        console.log("this.superior_id:",this.superior)
-        this.subordinates = Object.assign([],res.data.subordinates)
-      })
-    } else {
-      console.log("Add")
-    }
+        this.superior.model = { employee_id: res.data.employee_id };
+        console.log("this.superior_id:", this.superior);
+        this.subordinates = Object.assign([], res.data.subordinates);
 
+        this.test = [
+          {
+            employee_id: 1,
+            full_name: "MARTINEZ, ANTONIO M.",
+            is_complete: 1
+          },
+          {
+            employee_id: 2,
+            full_name: "BABOR, ERIC M.",
+            is_complete: 0
+          },
+        ];
+
+      });
+    } else {
+      console.log("Add");
+    }
   },
   watch: {
     "superior.search"(val) {
@@ -128,7 +144,7 @@ export default {
       this.axios
         .get("superior/get_free_employees")
         .then((res) => {
-          console.log("superior_datas:",res.data)
+          console.log("superior_datas:", res.data);
           this.superior.entries = res.data;
         })
         .then((res) => {
@@ -145,13 +161,14 @@ export default {
         superior_id: this.superior.id,
         superior_employee_id: this.superior.model.employee_id,
         subordinates: null,
-        office_id: this.office_id
+        office_id: this.office_id,
       };
       if (this.subordinates.length > 0) {
         payload.subordinates = this.subordinates;
         payload.subordinates.forEach((item) => delete item.full_name);
       }
-      console.log(payload);
+
+console.log(payload)
 
       // this.axios
       //   .post("/superior/create", payload)
@@ -193,4 +210,4 @@ export default {
     },
   },
 };
-</script> 
+</script>

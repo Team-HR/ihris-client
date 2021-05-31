@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-row>
-      <v-col cols="12" sm="12" md="12" class="mx-auto" :hidden="hideAddTable">
+      <v-col cols="12" sm="12" md="12" class="mx-auto yellow" :hidden="hideAddTable">
         <!-- selection table start -->
         <v-data-table
           :headers="selection.headers"
@@ -79,6 +79,9 @@
               <v-icon>mdi-account-remove-outline</v-icon>
             </v-btn>
           </template>
+          <template v-slot:[`item.is_complete`]="{ item }">
+            {{item.is_complete?'Completed':'To be Assessed'}}
+          </template>
         </v-data-table>
         <!-- selected table end -->
       </v-col>
@@ -140,13 +143,20 @@ export default {
           sortable: true,
           value: "full_name",
         },
+        {
+          text: "Remarks",
+          align: "start",
+          sortable: true,
+          value: "is_complete",
+        },
       ],
       search: "",
       items: [],
     },
   }),
+
+  watch: {
   
-  watch:{
     initItems (val){
       // console.log("old_initItems:",oldVal);
       // console.log("initItems:",val);
@@ -165,16 +175,15 @@ export default {
             });
           }
     }
-  },
   
+  },
+
   mounted() {
     // this.selected.items = JSON.parse(JSON.stringify(this.initItems))
     this.initialize();
     // console.log("initialize: ", this.initItems);
   },
-  created() {
-  
-  },
+  created() {},
 
   methods: {
     initialize() {
@@ -184,13 +193,16 @@ export default {
         .get("superior/get_free_employees")
         .then((res) => {
           // console.log(res)
-          console.log("superior_datas_picker:",res.data)
+          console.log("superior_datas_picker:", res.data);
           this.selection.items = res.data;
           // console.log(res.data);
+
         })
+
         .then((res) => {
-        
+
         })
+
         .catch((err) => {
           console.error(err);
         });
