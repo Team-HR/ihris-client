@@ -54,7 +54,7 @@ export default {
   watch: {},
   methods: {
     submitForm() {
-      console.log(this.office);
+      // console.log(this.office);
       //  check if db already has office name existing
       //  if none, add
       //  else, dont add and return error
@@ -65,7 +65,7 @@ export default {
           office: this.office,
         })
         .then((res) => {
-          console.log(res.data);
+          // console.log(res.data);
           this.$router.push(`/department/offices/${this.department_id}`)
         })
         .catch((err) => {
@@ -77,7 +77,7 @@ export default {
       this.axios
         .get("/departments/get_info/" + department_id)
         .then((res) => {
-          console.log(res.data);
+          // console.log(res.data);
           this.department = res.data.department;
         })
         .catch((err) => {

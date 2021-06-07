@@ -18,7 +18,7 @@
     <v-row>
       <v-col cols="12" sm="12" md="6" class="mx-auto">
         <!-- content here start -->
-        <v-data-table :headers="headers" :items="items" class="elevation-1">
+        <v-data-table @click:row="handleClick" :headers="headers" :items="items" class="elevation-1">
           <template v-slot:top>
             <v-toolbar flat>
               <v-toolbar-title>{{ tableTitle }}</v-toolbar-title>
@@ -79,6 +79,12 @@ export default {
     };
   },
   methods: {
+    handleClick(item){
+      // console.log(item);
+      this.$router.push(
+        `/department/offices/${this.department_id}/supervisory/${item.office_id}/edit/${item.id}`
+      );
+    },
     addNew() {
       this.dialog = true;
     },
@@ -94,7 +100,7 @@ export default {
         method: "get",
         url: "/superior/get_superiors/" + this.office_id,
       }).then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         this.items = res.data;
       });
     },
@@ -103,7 +109,7 @@ export default {
       this.axios
         .get("/department/get_info/" + department_id)
         .then((res) => {
-          console.log(res.data);
+          // console.log(res.data);
           this.department = res.data.department;
         })
         .catch((err) => {
@@ -115,7 +121,7 @@ export default {
       this.axios
         .get("/office/get_info/" + office_id)
         .then((res) => {
-          console.log(res.data);
+          // console.log(res.data);
           this.office = res.data.office;
         })
         .catch((err) => {

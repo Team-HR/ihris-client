@@ -8,10 +8,9 @@
       <v-spacer></v-spacer>
     </v-toolbar>
     <v-row>
-      <v-col cols="12" sm="12" md="6" class="mx-auto">
+      <v-col v-if="superior" cols="12" sm="12" md="6" class="mx-auto">
         <!-- <v-card> -->
-
-        <template v-for="(assessment, index) in assessments">
+        <template v-for="(assessment, index) in superior_assessments">
           <v-card :key="index" class="mt-2">
             <v-card-title primary-title>
               {{ assessment.title }}
@@ -26,18 +25,24 @@
               {{assessment.description}}
             </v-card-text>
             <v-card-actions>
-              <v-btn color="success" :to="`/assessments/${assessment.id}`">
+              <v-btn
+                color="success" :to="`/assessments/${assessment.id}`">
                 <v-icon>mdi-menu-right-outline</v-icon>
                 Start
               </v-btn>
-              <v-btn color="primary" :to="`/assessments/personnels/${assessment.id}`">
+              <!-- :to="`/assessments/personnels/${assessment.id}`" -->
+              <v-btn 
+                color="primary" 
+                :to="`/department/offices/${superior.department_id}/supervisory/${superior.office_id}/edit/${superior.id}`"
+              >
                 <v-icon class="mr-1">mdi-account-group-outline</v-icon> 
                 Personnels
               </v-btn>
-               <v-btn color="primary" :to="`/assessments/report/${assessment.id}`">
+               <!-- <v-btn
+                color="primary" :to="`/assessments/report/${assessment.id}`">
                 <v-icon class="mr-1">mdi-chart-box-outline</v-icon> 
                 Report
-              </v-btn>
+              </v-btn> -->
 
        <!--        <v-row no-gutters dense>
                 <v-col>
@@ -62,9 +67,6 @@
                 </v-col>
               </v-row>
                -->
-              
-               
-
             </v-card-actions>
           </v-card>
         </template>
@@ -78,7 +80,7 @@
 export default {
   data() {
     return {
-      assessments: [
+      superior_assessments: [
         {
           id: 1,
           title: "Competency Assessment",
@@ -86,10 +88,23 @@ export default {
           status: "Incomplete",
         },
       ],
+      superior: {}
     };
   },
-  mounted() {},
+  mounted() {
+    this.checkIfSuperior()
+  },
   watch: {},
-  methods: {},
+  methods: {
+    checkIfSuperior(){
+      this.axios({    
+        method: "get",
+        url: "superior/authCheck",
+      }).then(res=>{
+        // console.log("authCheck: ",res.data);
+        this.superior = JSON.parse(JSON.stringify(res.data));
+      })
+    }
+  },
 };
 </script> 

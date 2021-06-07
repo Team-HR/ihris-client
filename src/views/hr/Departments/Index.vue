@@ -11,6 +11,7 @@
       <v-col cols="12" sm="12" md="6" class="mx-auto">
         <!-- content here start -->
         <v-data-table
+          @click:row="handleClick"
           disable-pagination
           dense
           :search="search"
@@ -29,16 +30,15 @@
             />
           </template>
           <template v-slot:[`item.actions`]="{ item }">
-            <v-btn 
-              text color="primary"
-              :to="`/department/offices/${item.id}`"
-            >
-              <v-icon>mdi-folder-open-outline</v-icon> 
+            <v-btn text color="primary" :to="`/department/offices/${item.id}`">
+              <v-icon>mdi-folder-open-outline</v-icon>
               Office
             </v-btn>
           </template>
           <template v-slot:[`item.countOffices`]="{ item }">
-            <span v-if="item.countOffices > 1">{{item.countOffices + ' Offices'}}</span>
+            <span v-if="item.countOffices > 1">{{
+              item.countOffices + " Offices"
+            }}</span>
           </template>
           <template v-slot:no-data> No Data Found! </template>
         </v-data-table>
@@ -82,6 +82,12 @@ export default {
   },
   watch: {},
   methods: {
+    handleClick(item) {
+      // console.log(item);
+      this.$router.push(
+        `/department/offices/${item.id}`
+      );
+    },
     getItems() {
       this.axios({
         method: "get",

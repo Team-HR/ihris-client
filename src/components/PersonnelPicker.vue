@@ -20,7 +20,7 @@
           :headers="selected.headers"
           :items="selected.items"
           :search="selected.search"
-          sort-by="full_name"
+          sort-by="id"
           class="elevation-0"
           dense
           disable-pagination
@@ -45,8 +45,8 @@
               <td>
                 {{
                   item.is_complete
-                    ? "Completed, cannot be removed."
-                    : "To be Assessed"
+                    ? "COMPLETED, CANNOT BE REMOVED"
+                    : "TO BE ASSESSED"
                 }}
               </td>
             </tr>
@@ -103,7 +103,7 @@ export default {
 
   watch: {
     initItems(val, oldVal) {
-      console.log("ping:", val);
+      // console.log("ping:", val);
       if (val.length > 0) {
         this.selected.items = val;
         val.forEach((item) => {
@@ -118,7 +118,7 @@ export default {
           }
         });
       }
-      console.log(this.selection.items);
+      // console.log(this.selection.items);
     },
   },
 
@@ -162,8 +162,8 @@ export default {
         this.selection.items.push(item);
         this.selected.search = null;
       }
-      console.log(item);
-      console.log(this.selection.items);
+      // console.log(item);
+      // console.log(this.selection.items);
       this.$emit("changedSelected", this.selected.items);
     },
   },

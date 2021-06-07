@@ -4,13 +4,16 @@
       <v-avatar>
         <v-icon>mdi-pencil-ruler</v-icon>
       </v-avatar>
-      <v-toolbar-title>New Supervisor</v-toolbar-title>
+      <v-toolbar-title>{{ superior_id?"Edit Personnel":"New Supervisor" }}</v-toolbar-title>
       <v-divider class="mx-4" inset vertical></v-divider>
       <v-btn
         text
         color="primary"
-        :to="`/department/offices/${department_id}/supervisory/${office_id}`"
+        @click="backHistory"
       >
+      <!-- :to="`/department/offices/${department_id}/supervisory/${office_id}`" -->
+
+
         <v-icon>mdi-chevron-double-left</v-icon>
         Back
       </v-btn>
@@ -48,7 +51,7 @@
           </v-card-text>
           <v-card-actions>
             <v-btn text color="success" @click="saveEdit">Save</v-btn>
-            <v-btn text color="red">Cancel</v-btn>
+            <v-btn text color="red" @click="cancelEdit">Cancel</v-btn>
           </v-card-actions>
         </v-card>
 
@@ -147,6 +150,14 @@ export default {
     }
   },
   methods: {
+    backHistory(){
+      window.history.back()
+    },
+    cancelEdit() {
+          this.$router.push(
+            `/department/offices/${this.department_id}/supervisory/${this.office_id}`
+          );
+    },
     saveEdit() {
       var payload = {
         superior_id: this.superior.id,
@@ -163,10 +174,10 @@ export default {
       this.axios
         .post("/superior/create", payload)
         .then((res) => {
-          console.log("axios then:", res.data);
-          // this.$router.push(
-          //   `/department/ offices/${this.department_id}/supervisory/${this.office_id}`
-          // );
+          // console.log("axios then:", res.data);
+          this.$router.push(
+            `/department/offices/${this.department_id}/supervisory/${this.office_id}`
+          );
         })
         .catch((err) => {
           console.error(err);

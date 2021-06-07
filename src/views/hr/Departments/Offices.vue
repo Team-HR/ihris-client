@@ -17,10 +17,11 @@
       <v-col cols="12" sm="12" md="6" class="mx-auto">
         <!-- content here start -->
         <v-data-table
+          @click:row="handleClick"
           :headers="headers"
           :items="items"
           class="elevation-1"
-          sort-by="office"
+          sort-by="id"
         >
           <template v-slot:top>
             <v-toolbar flat>
@@ -84,6 +85,10 @@ export default {
   computed: {},
   watch: {},
   methods: {
+    handleClick(item){
+      // console.log(item);
+      this.$router.push(`/department/offices/${item.department_id}/supervisory/${item.id}`);
+    },
     getItems() {
       this.axios({
         method: "get",
@@ -92,7 +97,7 @@ export default {
         //   id: this.id
         // }
       }).then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         this.items = res.data;
       });
     },
@@ -101,7 +106,7 @@ export default {
       this.axios
         .get("/department/get_info/" + department_id)
         .then((res) => {
-          console.log(res.data);
+          // console.log(res.data);
           this.department = res.data.department;
         })
         .catch((err) => {
