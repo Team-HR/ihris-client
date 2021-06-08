@@ -2,7 +2,7 @@ import Vue from "vue";
 // Axios
 import axios from "axios";
 import VueAxios from "vue-axios";
-import store from "../../store/index";
+// import store from "../../store/index";
 
 axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 Vue.use(VueAxios, axios);

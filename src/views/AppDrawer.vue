@@ -136,6 +136,12 @@ export default {
           text: "Departments",
           path: "/departments",
         },
+        { heading: "Setup" },
+        {
+          icon: "mdi-account-supervisor-circle-outline",
+          text: "Settings",
+          path: "/settings",
+        },
         // { icon: "mdi-cog", text: "Settings" }
       ],
     };
