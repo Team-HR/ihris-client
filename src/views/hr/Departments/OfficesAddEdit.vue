@@ -20,12 +20,13 @@
         <v-row>
           <v-col cols="12" md="4">
             <v-text-field
-              v-model="office"
+              v-model="office_input"
               label="Office Name"
               placeholder="Name of office"
               required
               outlined
             ></v-text-field>
+            <!-- <v-text-field type="text" :value="office.toUpperCase()" @input="office = $event.target.value.toUpperCase()"/> -->
           </v-col>
         </v-row>
         <v-btn type="submit" color="success">Save</v-btn>
@@ -50,15 +51,23 @@ export default {
     // console.log(this.$route.params.id);
     this.department_id = this.$route.params.department_id;
   },
-  computed: {},
+  computed: {
+    office_input: {
+      // getter
+      get: function () {
+        return this.office
+      },
+      // setter
+      set: function (newValue) {
+        this.office = newValue.toUpperCase();
+        // return office;
+      },
+    },
+  },
   watch: {},
   methods: {
     submitForm() {
       // console.log(this.office);
-      //  check if db already has office name existing
-      //  if none, add
-      //  else, dont add and return error
-
       this.axios
         .post("office/create", {
           department_id: this.department_id,
@@ -66,7 +75,7 @@ export default {
         })
         .then((res) => {
           // console.log(res.data);
-          this.$router.push(`/department/offices/${this.department_id}`)
+          this.$router.push(`/department/offices/${this.department_id}`);
         })
         .catch((err) => {
           console.error(err);
