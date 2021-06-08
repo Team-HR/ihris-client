@@ -34,7 +34,6 @@
           </template>
           <template v-slot:[`item.actions`]="{ item }">
             <v-btn
-              text
               color="primary"
               :to="`/department/offices/${id}/supervisory/${item.id}`"
             >
@@ -85,9 +84,11 @@ export default {
   computed: {},
   watch: {},
   methods: {
-    handleClick(item){
+    handleClick(item) {
       // console.log(item);
-      this.$router.push(`/department/offices/${item.department_id}/supervisory/${item.id}`);
+      this.$router.push(
+        `/department/offices/${item.department_id}/supervisory/${item.id}`
+      );
     },
     getItems() {
       this.axios({
@@ -114,5 +115,5 @@ export default {
         });
     },
   },
-};
+}
 </script> 

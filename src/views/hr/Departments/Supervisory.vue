@@ -34,7 +34,7 @@
             </v-toolbar>
           </template>
           <template v-slot:[`item.actions`]="{ item }">
-            <v-btn text color="primary" :to="`/department/offices/${department_id}/supervisory/${office_id}/edit/${item.id}`">
+            <v-btn color="primary" :to="`/department/offices/${department_id}/supervisory/${office_id}/edit/${item.id}`">
               <v-icon small> mdi-pencil </v-icon>
                Edit
             </v-btn>

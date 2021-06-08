@@ -22,7 +22,6 @@
           :search="selected.search"
           sort-by="id"
           class="elevation-0"
-          dense
           disable-pagination
           hide-default-footer
         >
@@ -32,8 +31,7 @@
               <td>
                 <v-btn
                   :disabled="item.is_complete == 1 ? true : false"
-                  icon
-                  color="red"
+                  color="error"
                   @click="addRemoveItem(item)"
                 >
                   <!-- <v-icon>mdi-account-remove-outline</v-icon> -->

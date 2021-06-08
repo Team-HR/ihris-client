@@ -13,7 +13,6 @@
         <v-data-table
           @click:row="handleClick"
           disable-pagination
-          dense
           :search="search"
           :headers="headers"
           :items="items"
@@ -30,7 +29,7 @@
             />
           </template>
           <template v-slot:[`item.actions`]="{ item }">
-            <v-btn text color="primary" :to="`/department/offices/${item.id}`">
+            <v-btn color="primary" :to="`/department/offices/${item.id}`">
               <v-icon>mdi-folder-open-outline</v-icon>
               Office
             </v-btn>
