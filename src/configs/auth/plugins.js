@@ -29,8 +29,8 @@ Vue.use(auth, {
   // Redirects
 
   authRedirect: { path: "/login" },
-  forbiddenRedirect: { path: "/403" },
-  notFoundRedirect: { path: "/404" },
+  forbiddenRedirect: { path: "/login" },
+  notFoundRedirect: { path: "/login" },
 
   // Http
   registerData: {

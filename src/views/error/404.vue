@@ -9,7 +9,19 @@
           the previous page or go back to our homepage.
         </v-col>
       </v-row>
-      <v-btn to="/" text>Return Home</v-btn>
+      <v-btn @click="back" text outlined>
+        <v-icon>mdi-arrow-left</v-icon>
+        Back</v-btn>
     </v-alert>
   </div>
 </template>
+<script>
+export default {
+  methods: {
+    back(){
+      window.history.back();
+    }
+  }
+}
+</script>
+
