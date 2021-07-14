@@ -19,6 +19,8 @@
             <v-card>
               <v-card-title></v-card-title>
               <v-card-text>
+                <h3 class="header">Current Password</h3>
+                <v-divider horizontal class="ma-1 mb-5"></v-divider>
                 <v-text-field
                   v-model="currentPassword"
                   label="Current Password"
@@ -29,18 +31,20 @@
                   required
                   outlined
                 ></v-text-field>
-
+                
+                <h3 class="header">New Password</h3>
+                <v-divider horizontal class="ma-1 mb-5"></v-divider>
                 <v-text-field
+
                   v-model="newPassword"
                   label="New Password"
                   placeholder="Enter current password"
                   :type="show2 ? 'text' : 'password'"
                   :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
-                  @click:append="show2 = !show2"
                   required
                   outlined
                 ></v-text-field>
-                <div :hidden="show1 ? true : false">
+                <div :hidden="show2 ? true : false">
                   <v-text-field
                     v-model="confirmPassword"
                     label="Confirm Password"
@@ -48,7 +52,6 @@
                     :rules="[rules.passwordMatch]"
                     :type="show2 ? 'text' : 'password'"
                     :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
-                    @click:append="show2 = !show2"
                     required
                     outlined
                   ></v-text-field>
@@ -85,6 +88,18 @@ export default {
     },
     submitForm(){
       console.log("submitted! ", this.currentPassword + " "+ this.newPassword);
+
+    this.axios.post("auth/change-password",{
+      currentPassword: this.currentPassword,
+      newPassword: this.newPassword
+    })
+    .then(res => {
+      console.log(res)
+    })
+    .catch(err => {
+      console.error(err); 
+    })
+
       this.resetForm()
     },
     resetForm(){
