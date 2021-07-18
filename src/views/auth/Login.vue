@@ -1,6 +1,6 @@
 <template>
   <v-card class="mx-auto my-16" max-width="344">
-    <v-card-title>LOGIN</v-card-title>
+    <v-card-title>TALENT ASSESSMENT LOGIN</v-card-title>
     <v-card-text>
       <v-form @submit.prevent="login">
         <v-text-field
@@ -21,7 +21,7 @@
           hint="At least 8 characters"
           @click:append="show1 = !show1"
         ></v-text-field>
-        <v-checkbox
+        <!-- <v-checkbox
           class="py-0 my-0"
           v-model="form.remember"
           label="Remember Me"
@@ -30,7 +30,7 @@
           class="py-0 my-0"
           v-model="form.staySignedIn"
           label="Stay Signed-in"
-        ></v-checkbox>
+        ></v-checkbox> -->
         <v-btn type="submit" color="success" class="mr-4">Submit</v-btn>
         <v-btn color="error" class="mr-4" @click="reset">Clear</v-btn>
       </v-form>

@@ -4,11 +4,11 @@
 
     <v-list>
       <v-list-item two-line>
+        <!-- avatar starts here-->
         <v-list-item-avatar>
-          <!-- <img src="https://randomuser.me/api/portraits/men/81.jpg" /> -->
           <v-icon large>mdi-account-circle</v-icon>
         </v-list-item-avatar>
-
+        <!-- avatar ends here -->
         <v-list-item-content>
           <v-list-item-title>{{ $auth.user().name }}</v-list-item-title>
           <!-- <v-list-item-subtitle>{{$auth.user().roles}}</v-list-item-subtitle> -->

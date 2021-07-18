@@ -23,7 +23,7 @@
     <!-- <span class="ma-2"> Integrated Human Resource Information System </span> -->
     <v-toolbar-title>
       <span>
-        IHRIS
+        TALENT ASSESSMENT
       </span>
     </v-toolbar-title>
 

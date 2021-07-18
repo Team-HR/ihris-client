@@ -84,7 +84,7 @@ export default {
         {
           id: 1,
           title: "Competency Assessment",
-          description: "Assessment for supervisors assessing their subordinates' competencies.",
+          description: "For office supervisors only, for assessing their subordinates' competency gaps.",
           status: "Incomplete",
         },
       ],
