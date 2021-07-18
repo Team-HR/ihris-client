@@ -20,14 +20,15 @@
           :headers="selected.headers"
           :items="selected.items"
           :search="selected.search"
-          sort-by="id"
+          sort-by="index"
+          sort-desc="true"
           class="elevation-0"
           disable-pagination
           hide-default-footer
         >
-          <template v-slot:item="{ item, index }">
+          <template v-slot:item="{ item }">
             <tr>
-              <td>{{ index + 1 }}.)</td>
+              <td>{{ item.index + 1 }}.)</td>
               <td>
                 <v-btn
                   :disabled="item.is_complete == 1 ? true : false"
@@ -70,8 +71,8 @@ export default {
         {
           text: "#",
           align: "start",
-          sortable: false,
-          value: "number",
+          sortable: true,
+          value: "index",
           width: 10,
         },
         {
