@@ -21,14 +21,14 @@
           :items="selected.items"
           :search="selected.search"
           sort-by="index"
-          sort-desc="true"
+          :sort-desc="true"
           class="elevation-0"
           disable-pagination
           hide-default-footer
         >
-          <template v-slot:item="{ item }">
+          <template v-slot:item="{ item, index }">
             <tr>
-              <td>{{ item.index + 1 }}.)</td>
+              <td>{{ lengthOfSelected - index }}.)</td>
               <td>
                 <v-btn
                   :disabled="item.is_complete == 1 ? true : false"
@@ -71,8 +71,8 @@ export default {
         {
           text: "#",
           align: "start",
-          sortable: true,
-          value: "index",
+          sortable: false,
+          value: "number",
           width: 10,
         },
         {
@@ -125,7 +125,12 @@ export default {
     this.initialize();
   },
   created() {},
-
+  computed: {
+    lengthOfSelected(){
+      var length = this.selected.items.length
+      return length
+    }
+  },
   methods: {
     addItemAction() {
       this.addRemoveItem(this.addItem);
@@ -149,7 +154,9 @@ export default {
         })
         .indexOf(item.employee_id);
       if (index > -1) {
+        var length = this.selected.items.length
         this.selection.items.splice(index, 1);
+        item["index"] = length
         this.selected.items.push(item);
       } else {
         index = this.selected.items
