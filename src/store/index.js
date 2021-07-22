@@ -34,15 +34,18 @@ export default new Vuex.Store({
     assessment
   },
   actions: {
-    setAppLoading({ commit }) {
+    doload({ commit }) {
       commit("SET_APP_LOADING");
     },
-    setAppLoadingDone({ commit }) {
+    doneload({ commit }) {
+      commit("SET_APP_LOADING_DONE");
+    },
+    errorload({ commit }) {
       commit("SET_APP_LOADING_DONE");
     }
   },
   getters: {
-    getLoadingState(state) {
+    stateload(state) {
       return state.app_loading;
     }
   },

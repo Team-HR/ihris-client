@@ -19,7 +19,7 @@ export default {
   },
   computed: {
     query() {
-      return this.$store.getters.getLoadingState;
+      return this.$store.getters.stateload;
     }
   }
 };
