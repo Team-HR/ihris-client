@@ -1,6 +1,7 @@
 <template>
   <v-progress-linear
     v-model="value"
+    reverse
     active
     :indeterminate="query"
     :query="true"
