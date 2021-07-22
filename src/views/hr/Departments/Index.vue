@@ -25,12 +25,13 @@
           hide-default-footer
         >
           <template v-slot:top>
+
             <v-text-field
               dense
               outlined
               v-model="search"
               label="Search"
-              class="mx-4"
+              class="pt-5 mx-4"
             />
           </template>
           <template v-slot:[`item.actions`]="{ item }">
