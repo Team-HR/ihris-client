@@ -23,15 +23,15 @@
     <!-- <span class="ma-2"> Integrated Human Resource Information System </span> -->
     <v-toolbar-title>
       <span>
-        TALENT ASSESSMENT
+        HR - ONLINE ASSESSMENT MODULE
       </span>
     </v-toolbar-title>
 
     <v-spacer></v-spacer>
 
-    <v-btn icon>
+    <!-- <v-btn icon>
       <v-icon>mdi-bell-outline</v-icon>
-    </v-btn>
+    </v-btn> -->
     <!-- 
     <v-btn class="mt-1" text>Franz Joshua Valencia</v-btn>
     <v-menu bottom left offset-y transition="slide-x-transition">

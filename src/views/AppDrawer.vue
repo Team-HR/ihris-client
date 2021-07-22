@@ -69,6 +69,7 @@
           </v-list-item-content>
         </v-list-item>
       </template>
+
     </v-list>
     <template v-slot:append>
       <div class="pa-2">
@@ -76,6 +77,7 @@
           block
           @click.prevent="$store.dispatch('auth/logout')"
           v-if="$auth.check()"
+          color="red white--text"
         >
           <v-icon class="mr-5">mdi-logout-variant</v-icon>
           Logout</v-btn

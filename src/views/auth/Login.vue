@@ -1,9 +1,29 @@
 <template>
-  <v-card class="mx-auto my-16" max-width="344">
-    <v-card-title>TALENT ASSESSMENT LOGIN</v-card-title>
+<div>
+<!-- centered container starts here -->
+  <v-container fluid>
+  <v-layout justify-center align-center>
+    <v-flex shrink>
+      <div>
+        <img src="../../assets/logo.svg" alt="">
+      </div>
+    </v-flex>
+  </v-layout>
+  <v-layout justify-center align-center>
+    <v-flex shrink>
+      <div>
+        <v-card-title class="grey--text">ONLINE ASSESSMENT MODULE</v-card-title>
+      </div>
+    </v-flex>
+  </v-layout>
+  </v-container>
+  <!-- centered container ends here -->
+  <v-card class="mx-auto my-0" max-width="344">
+    <!-- <v-card-title class="primary white--text">LOGIN</v-card-title> -->
     <v-card-text>
       <v-form @submit.prevent="login">
         <v-text-field
+          outlined
           v-model="form.body.username"
           name="username"
           :error-messages="errors.username"
@@ -12,6 +32,7 @@
           type="text"
         ></v-text-field>
         <v-text-field
+          outlined
           v-model="form.body.password"
           :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
           :error-messages="errors.password"
@@ -31,11 +52,21 @@
           v-model="form.staySignedIn"
           label="Stay Signed-in"
         ></v-checkbox> -->
-        <v-btn type="submit" color="success" class="mr-4">Submit</v-btn>
-        <v-btn color="error" class="mr-4" @click="reset">Clear</v-btn>
+        
+        <!-- <v-btn type="submit" color="primary" class="mr-4">LOGIN</v-btn> -->
+         <v-btn
+         type="submit"
+          color="primary white--text"
+        >
+          <v-icon class="mr-5">mdi-login-variant</v-icon>
+          Login</v-btn
+        >
+        <!-- <v-btn color="error" class="mr-4" @click="reset">Clear</v-btn> -->
+        
       </v-form>
     </v-card-text>
   </v-card>
+  </div>
 </template>
 
 <script>
