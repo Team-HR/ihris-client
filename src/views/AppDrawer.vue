@@ -146,24 +146,24 @@ export default {
         // },
       ],
       items_sys_admin:[
-        { heading: "Office Setup" },
+        { heading: "System Administration" },
         {
           icon: "mdi-account-supervisor-circle-outline",
           text: "Departments",
           path: "/departments",
         },
-        { heading: "Setup" },
-        {
-          icon: "mdi-cog-outline",
-          text: "Settings",
-          path: "/settings",
-        },
+        // { heading: "Setup" },
+        // {
+        //   icon: "mdi-cog-outline",
+        //   text: "Settings",
+        //   path: "/settings",
+        // },
       ],
     };
   },
   mounted() {
     this.initialize()
-    this.getRoles()
+    this.checkRoles()
     // this.matchRoles(["sys_admin"])
   },
   methods: {
@@ -173,10 +173,14 @@ export default {
       // console.log("match: ",match);
       return match
     },
-    getRoles(){
+    checkRoles(){
       var user = this.$store.getters["auth/user"]
       this.roles = user.roles
       // console.log(user.roles)
+      // check if user is sys_admin
+      if (user.roles.includes("sys_admin")) {
+        this.items = JSON.parse(JSON.stringify(this.items.concat(this.items_sys_admin)))
+      }
     },
     initialize() {
       // console.log(this.items)
