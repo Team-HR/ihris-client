@@ -25,12 +25,17 @@
     </v-row>
     <v-row v-else-if="state == 1">
         <v-col cols="12" sm="12" md="6" class="mx-auto">
-            <span>
-          <v-btn color="primary" dark @click="dialog = true" text dense>
-            Pick
+            <v-card>
+                <v-card-text>
+        <span @click="dialog = true">
+          <v-btn class="mr-2" icon color="primary" dark dense>
+            <v-icon dense>mdi-pencil</v-icon>
           </v-btn>
-          {{ peers[subjectIndex].full_name }}
+          <span class="primary--text">{{ peers[subjectIndex].full_name }}</span>
         </span>
+
+        </v-card-text>
+        </v-card>
             <!-- fullscreen -->
             <!-- hide-overlay -->
             <v-dialog v-model="dialog" width="500" transition="dialog-bottom-transition">

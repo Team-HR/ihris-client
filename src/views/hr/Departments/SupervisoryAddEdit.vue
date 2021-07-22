@@ -50,8 +50,8 @@
             />
           </v-card-text>
           <v-card-actions>
-            <v-btn text color="success" @click="saveEdit">Save</v-btn>
-            <v-btn text color="red" @click="cancelEdit">Cancel</v-btn>
+            <v-btn color="success" @click="saveEdit">Save</v-btn>
+            <v-btn color="red" class="white--text" @click="cancelEdit">Cancel</v-btn>
           </v-card-actions>
         </v-card>
 
