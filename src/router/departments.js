@@ -3,6 +3,7 @@ import Offices from "../views/hr/Departments/Offices"
 import OfficesAddEdit from "../views//hr/Departments/OfficesAddEdit"
 import Supervisory from "../views/hr/Departments/Supervisory"
 import SupervisoryAddEdit from "../views/hr/Departments/SupervisoryAddEdit"
+import Report from "../views/hr/Departments/Report"
 
 const routes = [
   {
@@ -90,6 +91,21 @@ const routes = [
       }
     }
   },
+  {
+    path: "/departments/competency-report",
+    name: "departments-competency-report",
+    component: Report,
+    meta: {
+      title: "Departments-Competency-Report",
+      auth: {
+        roles: ["emp"],
+        redirect: "/login",
+        notFoundRedirect: "/404",
+        forbiddenRedirect: "/403"
+      }
+    }
+  },
+
 ];
 
 export default routes;

@@ -5,14 +5,22 @@
 <div>
     <!-- {{$route.params.id }} -->
     <v-toolbar>
-        <v-app-bar-nav-icon>
-            <v-btn icon to="/assessments">
-                <v-icon>mdi-arrow-left</v-icon>
-            </v-btn>
-        </v-app-bar-nav-icon>
-        <v-toolbar-title>Competency Assessment</v-toolbar-title>
-        <v-spacer></v-spacer>
+      <v-avatar>
+        <v-icon>mdi-pencil-ruler</v-icon>
+      </v-avatar>
+      <v-toolbar-title>Competency Assessment</v-toolbar-title>
+      <v-divider class="mx-4" inset vertical></v-divider>
+      <v-btn
+        text
+        color="primary"
+        to="/assessments"
+      >
+        <v-icon>mdi-chevron-double-left</v-icon>
+        Back
+      </v-btn>
+      <v-spacer></v-spacer>
     </v-toolbar>
+
     <v-row v-if="state == 0">
         <v-col cols="12" sm="12" md="6" class="mx-auto">
             <v-card class="elevation-0">
@@ -136,7 +144,7 @@
                                             Continue
                                         </v-btn>
 
-                                        <v-btn v-else color="success" @click="assessNext()">
+                                        <v-btn :disabled="saving?true:false" v-else color="success" @click="assessNext()">
                                             Submit
                                         </v-btn>
                                     </div>
@@ -162,7 +170,7 @@
             </v-card>
         </v-col>
     </v-row>
-    <v-snackbar v-model="snackbarToContinue" centered color="red" timeout="2000">
+    <v-snackbar v-model="snackbarErrorToContinue" centered color="red" timeout="2000">
         <v-icon>mdi-alert-decagram-outline</v-icon> Please select level to continue!
     </v-snackbar>
     </div>
@@ -177,7 +185,8 @@ export default {
 
     data() {
             return {
-                snackbarToContinue: false,
+                saving: false,
+                snackbarErrorToContinue: false,
                 dialog: true,
                 radioGroup: 0,
                 subjectIndex: 0,
@@ -262,17 +271,14 @@ export default {
                 nextStep(n) {
                     // console.log(this.peers[this.subjectIndex].data[n]?true:false);
                     // console.log();
-                    if (
-                        this.peers[this.subjectIndex].competency_records[n - 1]
-                        .questionnaire_option_id
-                    ) {
+                    if (this.peers[this.subjectIndex].competency_records[n - 1].questionnaire_option_id) {
                         if (n === this.steps) {
                             this.e1 = 1;
                         } else {
                             this.e1 = n + 1;
                         }
                     } else {
-                        this.snackbarToContinue = true;
+                        this.snackbarErrorToContinue = true;
                     }
                 },
                 backStep(n) {
@@ -283,20 +289,28 @@ export default {
                     }
                 },
                 assessNext() {
-                    // console.log("save_me: ", this.peers[this.subjectIndex]);
-                    this.axios
-                        .post("/competency/store", this.peers[this.subjectIndex])
-                        .then((res) => {
-                            // console.log(res);
-                            this.getPeers();
-                            this.dialog = true;
-                        })
-                        .catch((err) => {
-                            // console.error(err);
-                        });
-                    if (this.peers.length != this.subjectIndex + 1) {
-                        this.radioGroup = this.subjectIndex + 1;
+                    this.saving = true
+                    if(this.peers[this.subjectIndex].competency_records[23].questionnaire_option_id != null)
+                    {
+                        this.axios
+                            .post("/competency/store", this.peers[this.subjectIndex])
+                            .then((res) => {
+                                this.saving = false
+                                this.getPeers();
+                                this.dialog = true;
+                            })
+                            .catch((err) => {
+                                // console.error(err);
+                            });
+                        if (this.peers.length != this.subjectIndex + 1) {
+                            this.radioGroup = this.subjectIndex + 1;
+                        }
+                    } else 
+                    {
+                        this.snackbarErrorToContinue = true;
+                        this.saving = false
                     }
+                    
                 },
         },
 };

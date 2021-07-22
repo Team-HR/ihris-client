@@ -50,7 +50,7 @@
             />
           </v-card-text>
           <v-card-actions>
-            <v-btn color="success" @click="saveEdit">Save</v-btn>
+            <v-btn :disabled="saving?true:false" color="success" @click="saveEdit">Save</v-btn>
             <v-btn color="red" class="white--text" @click="cancelEdit">Cancel</v-btn>
           </v-card-actions>
         </v-card>
@@ -81,6 +81,7 @@ export default {
   },
   data() {
     return {
+      saving: false,
       test: [],
       superior_id: 0,
       office_id: 0,
@@ -154,11 +155,10 @@ export default {
       window.history.back()
     },
     cancelEdit() {
-          this.$router.push(
-            `/department/offices/${this.department_id}/supervisory/${this.office_id}`
-          );
+          this.backHistory()
     },
     saveEdit() {
+      this.saving = true
       var payload = {
         superior_id: this.superior.id,
         superior_employee_id: this.superior.model.employee_id,
@@ -175,6 +175,7 @@ export default {
         .post("/superior/create", payload)
         .then((res) => {
           // console.log("axios then:", res.data);
+          this.saving = false;
           this.$router.push(
             `/department/offices/${this.department_id}/supervisory/${this.office_id}`
           );

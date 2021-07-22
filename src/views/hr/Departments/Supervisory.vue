@@ -18,7 +18,7 @@
     <v-row>
       <v-col cols="12" sm="12" md="6" class="mx-auto">
         <!-- content here start -->
-        <v-data-table @click:row="handleClick" :headers="headers" :items="items" class="elevation-1">
+        <v-data-table @click:row="handleClick" :headers="headers" :items="items" class="elevation-1" disable-pagination hide-default-footer>
           <template v-slot:top>
             <v-toolbar flat>
               <v-toolbar-title>{{ tableTitle }}</v-toolbar-title>

@@ -12,6 +12,8 @@
       </v-btn>
       <v-spacer></v-spacer>
     </v-toolbar>
+<v-card class="ma-2">
+  <v-card-text>
 
     <!-- content here start -->
 
@@ -25,15 +27,19 @@
               placeholder="Name of office"
               required
               outlined
+              :loading ="saving?true:false"
             ></v-text-field>
             <!-- <v-text-field type="text" :value="office.toUpperCase()" @input="office = $event.target.value.toUpperCase()"/> -->
           </v-col>
         </v-row>
-        <v-btn type="submit" color="success">Save</v-btn>
+        <v-btn :disabled="saving?true:false" type="submit" color="success" >Save</v-btn>
       </v-container>
     </v-form>
 
     <!-- content here end -->
+        
+  </v-card-text>
+</v-card>
   </div>
 </template>
 
@@ -45,6 +51,7 @@ export default {
       id: 0,
       department_id: 0,
       office: "",
+      saving: false
     };
   },
   mounted() {
@@ -67,14 +74,20 @@ export default {
   watch: {},
   methods: {
     submitForm() {
-      // console.log(this.office);
+      this.saving = true
+      // simulate api request
+      // setTimeout(() => {
+      //   this.saving = false
+      //   this.$router.push(`/department/offices/${this.department_id}`);
+      // }, 5000);
+
       this.axios
         .post("office/create", {
           department_id: this.department_id,
           office: this.office,
         })
         .then((res) => {
-          // console.log(res.data);
+          this.saving = false
           this.$router.push(`/department/offices/${this.department_id}`);
         })
         .catch((err) => {

@@ -17,6 +17,8 @@
       <v-col cols="12" sm="12" md="6" class="mx-auto">
         <!-- content here start -->
         <v-data-table
+          disable-pagination
+          hide-default-footer
           @click:row="handleClick"
           :headers="headers"
           :items="items"
