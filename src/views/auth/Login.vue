@@ -9,17 +9,11 @@
       </div>
     </v-flex>
   </v-layout>
-  <v-layout justify-center align-center>
-    <v-flex shrink>
-      <div>
-        <v-card-title class="grey--text">ONLINE ASSESSMENT MODULE</v-card-title>
-      </div>
-    </v-flex>
-  </v-layout>
   </v-container>
   <!-- centered container ends here -->
   <v-card class="mx-auto my-0" max-width="344">
     <!-- <v-card-title class="primary white--text">LOGIN</v-card-title> -->
+    <v-card-title class="primary--text mx-2">ONLINE ASSESSMENT MODULE</v-card-title>
     <v-card-text>
       <v-form @submit.prevent="login">
         <v-text-field
@@ -91,10 +85,8 @@ export default {
     login() {
       // console.log(this.form);
       this.$store.dispatch("auth/login", this.form).catch(error => {
-        // console.log(res);
         // this.errors = Object.assign({}, res.errors);
-        console.log(error[0].status)
-        
+        // console.log(error)
       });
     },
     reset() {

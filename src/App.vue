@@ -1,5 +1,6 @@
 <template>
-  <v-app>
+  <v-app :style="{'background-image':'url('+bg+')'}">
+  <!-- <v-app class="bg-img"> -->
     <app-progress />
     <app-bar @toggled_drawer="drawer = !drawer" v-if="$auth.check()" />
     <app-drawer v-if="$auth.check()" :drawn="drawer" class="elevation-0 mt-1" />
@@ -28,6 +29,7 @@ import BackToTop from "vue-backtotop";
 export default {
   data() {
     return {
+      bg: require('./assets/circuitboardbg.gif'),
       transitionName: "",
       drawer: true,
       window_height: 720
@@ -46,3 +48,13 @@ export default {
   // }
 };
 </script>
+
+<style>
+  .bg-img {
+      background: url('https://vuejs.org/images/logo.png') no-repeat center center fixed;
+      -moz-background-size: cover;
+      -webkit-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+  }
+</style>
