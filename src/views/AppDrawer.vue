@@ -103,8 +103,7 @@ export default {
       drawer: true,
       items: [
         { heading: "Navigation" },
-        // { icon: "mdi-home-circle-outline", text: "Home", path: "/" },
-
+        { icon: "mdi-home-circle-outline", text: "Home", path: "/" },
         // { icon: "mdi-pencil-ruler", text: "Competency Assessment", path: "/competency" },
         { icon: "mdi-pencil-ruler", text: "Assessments", path: "/assessments" },
         // { icon: "", text: "Staff Management", path: "/staff-management" },
