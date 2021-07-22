@@ -88,7 +88,7 @@ export default {
           status: "Incomplete",
         },
       ],
-      superior: {}
+      superior: null
     };
   },
   mounted() {
@@ -101,7 +101,7 @@ export default {
         method: "get",
         url: "superior/authCheck",
       }).then(res=>{
-        // console.log("authCheck: ",res.data);
+        console.log("authCheck: ",res.data);
         this.superior = JSON.parse(JSON.stringify(res.data));
       })
     }
