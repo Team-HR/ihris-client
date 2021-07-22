@@ -40,15 +40,9 @@ export default {
     AppBar,
     AppDrawer
   },
-  mounted() {
-    // this.window_height = window.screen.height * 0.9;
-    // window.addEventListener("scroll", function(e) {
-    //   var scrollPos = window.scrollY;
-    //   var winHeight = window.innerHeight;
-    //   var docHeight = document.documentElement.scrollHeight;
-    //   var perc = (100 * scrollPos) / (docHeight - winHeight);
-    //   console.log(scrollPos);
-    // });
-  }
+  
+  // updated() {
+  //   console.log("getter: ",this.$store.getters["auth/user"]);
+  // }
 };
 </script>

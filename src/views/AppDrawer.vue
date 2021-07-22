@@ -97,6 +97,7 @@ export default {
   },
   data() {
     return {
+      roles: [],
       drawer: true,
       items: [
         { heading: "Navigation" },
@@ -130,6 +131,20 @@ export default {
         //     },
         //   ],
         // },
+        // { heading: "Office Setup" },
+        // {
+        //   icon: "mdi-account-supervisor-circle-outline",
+        //   text: "Departments",
+        //   path: "/departments",
+        // },
+        // { heading: "Setup" },
+        // {
+        //   icon: "mdi-cog-outline",
+        //   text: "Settings",
+        //   path: "/settings",
+        // },
+      ],
+      items_sys_admin:[
         { heading: "Office Setup" },
         {
           icon: "mdi-account-supervisor-circle-outline",
@@ -142,16 +157,28 @@ export default {
           text: "Settings",
           path: "/settings",
         },
-        // { icon: "mdi-cog", text: "Settings" }
       ],
     };
   },
   mounted() {
-    this.initialize;
+    this.initialize()
+    this.getRoles()
+    // this.matchRoles(["sys_admin"])
   },
   methods: {
+    matchRoles(arr){
+      var match = false
+      match = arr.some(r=> this.roles.indexOf(r) >= 0)
+      // console.log("match: ",match);
+      return match
+    },
+    getRoles(){
+      var user = this.$store.getters["auth/user"]
+      this.roles = user.roles
+      // console.log(user.roles)
+    },
     initialize() {
-      console.log(this.items);
+      // console.log(this.items)
     },
   },
 };
