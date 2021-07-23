@@ -6,9 +6,9 @@
       </v-avatar>
       <v-toolbar-title>Settings</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn>
+      <!-- <v-btn>
         <v-icon>mdi-arrow-left</v-icon>
-      </v-btn>
+      </v-btn> -->
     </v-toolbar>
     <v-row>
       <v-col v-if="superior" cols="12" sm="12" md="6" class="mx-auto">

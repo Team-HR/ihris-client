@@ -138,12 +138,12 @@ export default {
         //   text: "Departments",
         //   path: "/departments",
         // },
-        // { heading: "Setup" },
-        // {
-        //   icon: "mdi-cog-outline",
-        //   text: "Settings",
-        //   path: "/settings",
-        // },
+        { heading: "Setup" },
+        {
+          icon: "mdi-cog-outline",
+          text: "Settings",
+          path: "/settings",
+        },
       ],
       items_sys_admin:[
         { heading: "System Administration" },
