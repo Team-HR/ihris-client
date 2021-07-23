@@ -33,7 +33,6 @@
           :type="show1 ? 'text' : 'password'"
           name="password"
           label="Password"
-          hint="At least 8 characters"
           @click:append="show1 = !show1"
         ></v-text-field>
         <!-- <v-checkbox
