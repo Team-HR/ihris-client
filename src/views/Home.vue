@@ -25,6 +25,8 @@
               <p>
               See list of available assessments from link below.
               </p>
+              <p class=""><v-icon color="red">mdi-alert-decagram-outline</v-icon> <b class="red--text">Important!</b> First time logging in? Please change your password here: <v-btn color="primary" class="" small text to="/settings-change-password"><v-icon class="mr-1">mdi-account-key-outline</v-icon>Change Password</v-btn></p>
+            
               <v-btn
                 color="primary" to="/assessments">
                 <v-icon>mdi-menu-right-outline</v-icon>
