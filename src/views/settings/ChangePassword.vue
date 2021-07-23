@@ -50,6 +50,7 @@
                 <div >
                   <v-text-field
                     v-model="confirmPassword"
+                    :error-messages="confirm_new_pass_err_msg"
                     label="Confirm Password"
                     placeholder="Enter current password"
                     :rules="[rules.passwordMatch]"
@@ -109,6 +110,7 @@ export default {
       snackbar: false,
       pass_err_msg: "",
       new_pass_err_msg: "",
+      confirm_new_pass_err_msg: "",
       saving: false,
       currentPassword: "",
       valid: null,
@@ -122,6 +124,13 @@ export default {
       },
     };
   },
+  watch:{
+    snackbar(val){
+      if (!val) {
+        this.back()
+      }
+    }
+  },
   methods: {
     toggleShow2(){
       this.show2 = !this.show2
@@ -133,14 +142,20 @@ export default {
       this.saving = true
       this.pass_err_msg = ""
       this.new_pass_err_msg = ""
+      this.confirm_new_pass_err_msg = ""
+
+      if (this.newPassword !== this.confirmPassword) {
+        this.saving = false
+        this.confirm_new_pass_err_msg = "Please confirm new password!"
+        return false
+      }
 
       this.axios.post("auth/change-password",{
         currentPassword: this.currentPassword,
         newPassword: this.newPassword
       })
       .then(res => {
-        console.log(res.data)
-
+        // console.log(res.data)
         if(!res.data.success){
           if(!res.data.confirmed){
             this.pass_err_msg = res.data.message
