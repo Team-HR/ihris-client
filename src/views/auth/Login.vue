@@ -20,7 +20,7 @@
           outlined
           v-model="form.body.username"
           name="username"
-          :error-messages="errors.username"
+          :error-messages="error_username"
           label="Username"
           required
           type="text"
@@ -29,7 +29,7 @@
           outlined
           v-model="form.body.password"
           :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-          :error-messages="errors.password"
+          :error-messages="error_password"
           :type="show1 ? 'text' : 'password'"
           name="password"
           label="Password"
@@ -67,6 +67,8 @@
 export default {
   data() {
     return {
+      error_username: "",
+      error_password: "",
       form: {
         body: {
           username: "",
@@ -86,7 +88,9 @@ export default {
       // console.log(this.form);
       this.$store.dispatch("auth/login", this.form).catch(error => {
         // this.errors = Object.assign({}, res.errors);
-        // console.log(error)
+        // console.log("error: ",error)
+        this.error_username = error.error_username
+        this.error_password = error.error_password
       });
     },
     reset() {
