@@ -15,12 +15,12 @@
             <v-card-title primary-title>
               {{ assessment.title }}
             </v-card-title>
-            <v-card-subtitle
+            <!-- <v-card-subtitle
               >Status:
               <span class="red--text">{{
                 assessment.status
               }}</span></v-card-subtitle
-            >
+            > -->
             <v-card-text>
               {{assessment.description}}
             </v-card-text>
@@ -38,35 +38,6 @@
                 <v-icon class="mr-1">mdi-account-group-outline</v-icon> 
                 Personnels
               </v-btn>
-               <!-- <v-btn
-                color="primary" :to="`/assessments/report/${assessment.id}`">
-                <v-icon class="mr-1">mdi-chart-box-outline</v-icon> 
-                Report
-              </v-btn> -->
-
-       <!--        <v-row no-gutters dense>
-                <v-col>
-                  <v-btn color="success" :to="`/assessments/${assessment.id}`">
-                <v-icon>mdi-menu-right-outline</v-icon>
-                Start
-              </v-btn>
-                </v-col>
-                <v-col>
-                  <v-btn color="primary" :to="`/assessments/personnels/${assessment.id}`">
-                <v-icon class="mr-1">mdi-account-group-outline</v-icon> 
-                Personnels
-              </v-btn>
-
-                </v-col>
-                <v-col>
-                  <v-btn color="primary" :to="`/assessments/report/${assessment.id}`">
-                <v-icon class="mr-1">mdi-chart-box-outline</v-icon> 
-                Report
-              </v-btn>
-
-                </v-col>
-              </v-row>
-               -->
             </v-card-actions>
           </v-card>
         </template>
