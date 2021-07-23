@@ -145,7 +145,7 @@
                                         </v-btn>
 <!-- <div v-if="peers[subjectIndex].is_complete==1"> -->
                                         <v-btn :disabled="saving||peers[subjectIndex].is_complete?true:false" v-else color="success" @click="assessNext()">
-                                            Submit
+                                            Submit & Lock
                                         </v-btn>
 <!-- </div> -->
                                     </div>
