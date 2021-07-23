@@ -123,7 +123,7 @@
                                                 <tr v-for="(level, k) in item.levels" :key="k">
                                                     <td style="white-space: nowrap">
                                                         <!-- :value="k + 1" -->
-                                                        <v-checkbox v-model="
+                                                        <v-checkbox :disabled="peers[subjectIndex].is_complete?true:false" v-model="
                             peers[subjectIndex].competency_records[i]
                               .questionnaire_option_id
                           " :value="level.questionnaire_option_id" :label="`Level ${k + 1}`" />
@@ -143,10 +143,11 @@
                                         <v-btn v-if="e1 != 24" color="primary" @click="nextStep(i + 1)">
                                             Continue
                                         </v-btn>
-
-                                        <v-btn :disabled="saving?true:false" v-else color="success" @click="assessNext()">
+<!-- <div v-if="peers[subjectIndex].is_complete==1"> -->
+                                        <v-btn :disabled="saving||peers[subjectIndex].is_complete?true:false" v-else color="success" @click="assessNext()">
                                             Submit
                                         </v-btn>
+<!-- </div> -->
                                     </div>
                                     <!-- <v-btn color="primary" @click="logMe()" text> log </v-btn> -->
                                     <!-- <v-spacer></v-spacer> -->
