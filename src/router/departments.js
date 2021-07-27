@@ -3,7 +3,6 @@ import Offices from "../views/hr/Departments/Offices"
 import OfficesAddEdit from "../views//hr/Departments/OfficesAddEdit"
 import Supervisory from "../views/hr/Departments/Supervisory"
 import SupervisoryAddEdit from "../views/hr/Departments/SupervisoryAddEdit"
-import Report from "../views/hr/Departments/Report"
 
 const routes = [
   {
@@ -13,7 +12,7 @@ const routes = [
     meta: {
       title: "Departments",
       auth: {
-        roles: ["emp"],
+        roles: ["sys_admin"],
         redirect: "/login",
         notFoundRedirect: "/404",
         forbiddenRedirect: "/403"
@@ -27,7 +26,7 @@ const routes = [
     meta: {
       title: "Offices",
       auth: {
-        roles: ["emp"],
+        roles: ["sys_admin"],
         redirect: "/login",
         notFoundRedirect: "/404",
         forbiddenRedirect: "/403"
@@ -83,20 +82,6 @@ const routes = [
     component: OfficesAddEdit,
     meta: {
       title: "Office-New",
-      auth: {
-        roles: ["emp"],
-        redirect: "/login",
-        notFoundRedirect: "/404",
-        forbiddenRedirect: "/403"
-      }
-    }
-  },
-  {
-    path: "/departments/competency-report",
-    name: "departments-competency-report",
-    component: Report,
-    meta: {
-      title: "Departments-Competency-Report",
       auth: {
         roles: ["emp"],
         redirect: "/login",

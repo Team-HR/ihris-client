@@ -4,10 +4,10 @@
       <v-avatar>
         <v-icon>mdi-pencil-ruler</v-icon>
       </v-avatar>
-      <v-toolbar-title>Report</v-toolbar-title>
+      <v-toolbar-title>Office Overview</v-toolbar-title>
       <v-divider class="mx-4" inset vertical></v-divider>
 
-      <v-btn text color="primary" to="/departments">
+      <v-btn text color="primary" @click="$router.go(-1)">
         <v-icon>mdi-chevron-double-left</v-icon>
         Back
       </v-btn>
@@ -55,7 +55,7 @@ export default {
     };
   },
   mounted() {
-      this.axios.get("/department/get_department_tree").then((res)=>{
+      this.axios.get("/competency/get_department_tree").then((res)=>{
         //   console.log(res.data);
           this.items = JSON.parse(JSON.stringify(res.data))
       })

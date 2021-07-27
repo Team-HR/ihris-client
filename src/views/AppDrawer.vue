@@ -147,10 +147,15 @@ export default {
       ],
       items_sys_admin:[
         { heading: "System Administration" },
+        // {
+        //   icon: "mdi-account-supervisor-circle-outline",
+        //   text: "Departments",
+        //   path: "/departments",
+        // },
         {
           icon: "mdi-account-supervisor-circle-outline",
-          text: "Departments",
-          path: "/departments",
+          text: "Sys-Admin Setup",
+          path: "/sys-admin-setup",
         },
         // { heading: "Setup" },
         // {

@@ -15,6 +15,7 @@ import assessments from "./assessments";
 import office_staff_management from "./office_staff_management.js";
 import departments from "./departments.js";
 import settings from "./settings.js";
+import sys_admin_setup from "./sys_admin_setup";
 
 const routes = [
     { path: "*", redirect: "/404" },
@@ -41,7 +42,7 @@ const routes = [
         }
     },
 ].concat(auth, errors, accs, emps, comp, assessments, office_staff_management, departments,
-    settings);
+    settings,sys_admin_setup);
 
 Vue.router = new VueRouter({
     hashbang: false,

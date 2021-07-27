@@ -7,7 +7,7 @@
       <v-toolbar-title>Office Setup</v-toolbar-title>
       <v-divider class="mx-4" inset vertical></v-divider>
 
-      <v-btn text color="primary" to="/departments">
+      <v-btn text color="primary" @click="$router.go(-1)">
         <v-icon>mdi-chevron-double-left</v-icon>
         Back
       </v-btn>

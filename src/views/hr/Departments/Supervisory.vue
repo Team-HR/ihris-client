@@ -8,11 +8,14 @@
 
       <v-divider class="mx-4" inset vertical></v-divider>
 
-      <v-btn text color="primary" :to="`/department/offices/${department_id}`">
+      <!-- <v-btn text color="primary" :to="`/department/offices/${department_id}`">
+        <v-icon>mdi-chevron-double-left</v-icon>
+        Back
+      </v-btn> -->
+      <v-btn text color="primary" @click="$router.go(-1)">
         <v-icon>mdi-chevron-double-left</v-icon>
         Back
       </v-btn>
-
       <v-spacer></v-spacer>
     </v-toolbar>
     <v-row>

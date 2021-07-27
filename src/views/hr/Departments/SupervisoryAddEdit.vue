@@ -6,14 +6,15 @@
       </v-avatar>
       <v-toolbar-title>{{ superior_id?"Edit Personnel":"New Supervisor" }}</v-toolbar-title>
       <v-divider class="mx-4" inset vertical></v-divider>
-      <v-btn
+      <!-- <v-btn
         text
         color="primary"
         @click="backHistory"
       >
-      <!-- :to="`/department/offices/${department_id}/supervisory/${office_id}`" -->
-
-
+        <v-icon>mdi-chevron-double-left</v-icon>
+        Back
+      </v-btn> -->
+      <v-btn text color="primary" @click="$router.go(-1)">
         <v-icon>mdi-chevron-double-left</v-icon>
         Back
       </v-btn>

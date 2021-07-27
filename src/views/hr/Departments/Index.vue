@@ -6,12 +6,15 @@
       </v-avatar>
       <v-toolbar-title>Departments</v-toolbar-title>
       <v-divider inset vertical class="mx-5"></v-divider>
-      <v-btn color="" to="/departments/competency-report">
-        Report
+   <v-btn text color="primary" @click="$router.go(-1)">
+        <v-icon>mdi-chevron-double-left</v-icon>
+        Back
       </v-btn>
       <v-spacer></v-spacer>
      
     </v-toolbar>
+
+
     <v-row>
       <v-col cols="12" sm="12" md="6" class="mx-auto">
         <!-- content here start -->
