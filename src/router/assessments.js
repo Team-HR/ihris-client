@@ -1,6 +1,6 @@
 import Assessments from "../views/assessments/Index"
 import Assessment from "../views/assessments/Assessment"
-import Personnels from "../views/assessments/Personnels"
+import Personnel from "../views/assessments/Personnel"
 import StaffManagement from "../views/hr/StaffManagement.vue"
 
 const routes = [
@@ -33,11 +33,11 @@ const routes = [
     }
   },
   {
-    path: "/assessments/personnels/:id",
-    name: "assessment-personnels",
-    component: Personnels,
+    path: "/assessments/personnel/:id",
+    name: "assessment-personnel",
+    component: Personnel,
     meta: {
-      title: "Edit Personnels",
+      title: "Edit Personnel",
       auth: {
         roles: ["emp"],
         redirect: "/login",
