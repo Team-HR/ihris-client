@@ -30,13 +30,12 @@
                 <v-icon>mdi-menu-right-outline</v-icon>
                 Start
               </v-btn>
-              <!-- :to="`/assessments/personnels/${assessment.id}`" -->
               <v-btn 
                 color="primary" 
                 :to="`/department/offices/${superior.department_id}/supervisory/${superior.office_id}/edit/${superior.id}`"
               >
                 <v-icon class="mr-1">mdi-account-group-outline</v-icon> 
-                Personnels
+                Personnel
               </v-btn>
             </v-card-actions>
           </v-card>

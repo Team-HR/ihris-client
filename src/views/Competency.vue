@@ -159,7 +159,7 @@
       <v-col cols="12" sm="12" md="6" class="mx-auto">
         <v-card>
           <v-card-text>
-            <h1>No List Found! Please add personnels to the poll.</h1>
+            <h1>No List Found! Please add personnel to the poll.</h1>
           </v-card-text>
         </v-card>
       </v-col>

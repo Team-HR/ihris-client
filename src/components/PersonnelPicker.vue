@@ -5,7 +5,7 @@
         <!-- selected table start -->
         <v-autocomplete
           @change="addItemAction"
-          label="Add Personnels"
+          label="Add Personnel"
           placeholder="Search for personnel's name to add..."
           prepend-icon="mdi-account-multiple-plus"
           outlined
