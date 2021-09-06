@@ -65,6 +65,12 @@ export default {
           icon: "mdi-cog",
           title: "Competency Setup",
           subtitle: "Setting up competency assessment"
+        },
+        {
+          to: "/employee-registration",
+          icon: "mdi-account-arrow-right-outline",
+          title: "Employee Registration",
+          subtitle: "Add employee a new account"
         }
       ],
     };
